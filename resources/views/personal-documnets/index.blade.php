@@ -67,7 +67,7 @@
                     <td>
                       <p class="text-xs font-weight-bold mb-0">
                         <div class="mb-3">
-                        <input class="form-control" type="file" name="current_or_previous_passport" id="formFile" @if(!empty($personal_document) && ($personal_document->doc_current_or_previous_passport_status == 'pending') || ($personal_document->doc_current_or_previous_passport_status == 'verified') ) disabled @endif>
+                        <input class="form-control" type="file" name="current_or_previous_passport" id="formFile" @if(!empty($personal_document) && ($personal_document->doc_current_or_previous_passport_status == 'pending' || $personal_document->doc_current_or_previous_passport_status == 'verified') ) disabled @endif>
                         </div>
                       </p>
 

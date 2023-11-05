@@ -17,19 +17,18 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
+    return redirect('/login');
+});
 Route::middleware('auth')->group(function () {
-/*     Route::get('/', function () {
+    /*     Route::get('/', function () {
         return view('welcome');
     }); */
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::middleware('role:user')->prefix('/user')->group(function () {
 
-    Route::prefix('/user')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('user.dashboard');
 
         Route::prefix('/personal-documents')->group(function () {
             Route::get('/', [PersonalDocumentsController::class, 'index'])->name('personal.documents.index');
@@ -39,11 +38,15 @@ Route::middleware('auth')->group(function () {
             Route::put('/update/{id}', [PersonalDocumentsController::class, 'update'])->name('personal.documents.update');
             Route::delete('/destroy/{id}', [PersonalDocumentsController::class, 'destroy'])->name('personal.documents.destroy');
         });
+    });
 
+    Route::middleware('role:admin')->prefix('/admin')->group(function () {
+        Route::get('/dashboard', function () {
+            return view('admin.dashboard');
+        })->name('admin.dashboard');
 
     });
 
-
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
