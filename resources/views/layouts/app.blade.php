@@ -22,7 +22,7 @@
 
     @show
 
-    @include('layouts.slidebar')
+    @include('layouts.sidebar')
 
     <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
         @include('layouts.header')
@@ -31,7 +31,6 @@
 
     </main>
 
-    @include('layouts.footer')
 
     @include('layouts.plugins')
 
