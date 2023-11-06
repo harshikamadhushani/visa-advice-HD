@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Financial Developments
+    Financial Documents
 @endsection
 
 @section('css')
@@ -10,10 +10,16 @@
             margin-top: 15px;
             margin-left: 10px;
         }
+        .text-danger {
+       color: red;
+      font-weight: bold;
+      }
+
     </style>
 @endsection
 
 @section('content')
+<h3>Financial Documentations</h3>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
@@ -62,7 +68,7 @@
 
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Saving Accounts</h6>
+                                                    <h6 class="mb-0 text-sm">Saving Accounts <span class="text-danger">*</span></h6>
                                                     <p class="text-xs text-secondary mb-0">Personal/family bank statements
                                                         for the last 6 months <br>and a balance confirmation letter from the
                                                         bank</p>
@@ -141,7 +147,7 @@
 
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Current Accounts</h6>
+                                                    <h6 class="mb-0 text-sm">Current Accounts <span class="text-danger">*</span></h6>
                                                     <p class="text-xs text-secondary mb-0">Bank Statements showing what has
                                                         been paid in and out of an account <br> for up to the previous six
                                                         months, and naming the account holder</p>
@@ -255,7 +261,7 @@
 
                                                 </div>
                                                 <div class="d-flex flex-column justify-content-center">
-                                                    <h6 class="mb-0 text-sm">Evidence of assets</h6>
+                                                    <h6 class="mb-0 text-sm">Evidence of assets <span class="text-danger">*</span></h6>
                                                     <p class="text-xs text-secondary mb-0">Documentation for your assets
                                                         may include property deeds and vehicle registrations.<br> Property
                                                         valuation is optional but can be included.</p>

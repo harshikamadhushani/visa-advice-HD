@@ -5,30 +5,6 @@
 @endsection
 
 @section('content')
-{{--     <div class="container position-sticky z-index-sticky top-0">
-        <div class="row">
-            <div class="col-12">
-                <!-- Navbar -->
-                <nav
-                    class="navbar navbar-expand-lg blur blur-rounded top-0 z-index-3 shadow position-absolute my-3 py-2 start-0 end-0 mx-4">
-                    <div class="container-fluid pe-0">
-                        <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="../pages/dashboard.html">
-                            Visa Advice
-                        </a>
-
-                        <ul class="navbar-nav d-lg-block d-none">
-                            <li class="nav-item">
-                                <a href="" class="btn btn-sm btn-round mb-0 me-1 bg-gradient-dark">Contact us</a>
-                            </li>
-                        </ul>
-                    </div>
-            </div>
-            </nav>
-            <!-- End Navbar -->
-        </div>
-    </div>
-    </div> --}}
-
     <main class="main-content  mt-0">
         <section>
             <div class="page-header min-vh-75">

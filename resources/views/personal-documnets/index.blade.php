@@ -11,12 +11,17 @@
         margin-top: 15px;
         margin-left: 10px;
     }
+
+    .text-danger {
+       color: red;
+      font-weight: bold;
+      }
 </style>
 
 @endsection
 
 @section('content')
-
+<h3>  Personal Documentations</h3>
 <div class="container-fluid py-4">
     <div class="row">
       <div class="col-12">
@@ -34,12 +39,9 @@
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Upload</th>
                     @if(!empty($personal_document))
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                    {{-- <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th> --}}
-                    {{-- <th class="text-secondary opacity-7"></th> --}}
                     @endif
-
-
                   </tr>
+
                 </thead>
                 @if(empty($personal_document))
                 <form  method="post" action="{{ route('personal.documents.store') }}" enctype="multipart/form-data">
@@ -59,7 +61,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Current Passports and Previous Passport <span class="text-danger">(Required)</span></h6>
+                          <h6 class="mb-0 text-sm">Current Passports and Previous Passport <span class="text-danger">*</span></h6>
                           <p class="text-xs text-secondary mb-0">jpeg</p>
                         </div>
                       </div>
@@ -76,28 +78,19 @@
 
                     <td class="align-middle text-center text-sm">
                       <span class="badge badge-sm
-@if($personal_document->doc_current_or_previous_passport_status == 'verified')
-                      bg-gradient-success
-@elseif($personal_document->doc_current_or_previous_passport_status == 'rejected')
-                        bg-gradient-danger
-@elseif($personal_document->doc_current_or_previous_passport_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary
-@endif
+                        @if($personal_document->doc_current_or_previous_passport_status == 'verified')
+                                            bg-gradient-success
+                        @elseif($personal_document->doc_current_or_previous_passport_status == 'rejected')
+                                                bg-gradient-danger
+                        @elseif($personal_document->doc_current_or_previous_passport_status == 'pending')
+                                                bg-gradient-warning
+                        @else
+                                                bg-gradient-secondary
+                        @endif
                       ">{{ $personal_document->doc_current_or_previous_passport_status }}</span>
                     </td>
-{{--                     <td class="align-middle text-center">
-                      <div class="ms-auto text-end">
-                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                      </div>
-                    </td> --}}
-
                     @endif
-
                   </tr>
-
 
                   <tr>
                     <td>
@@ -106,7 +99,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Documents showing where you live currently <span class="text-danger">(Required)</span></h6>
+                          <h6 class="mb-0 text-sm">Documents showing where you live currently <span class="text-danger">*</span></h6>
                           <p class="text-xs text-secondary mb-0"> Property deed or tenancy agreement is required for the visa application.</p>
                         </div>
                       </div>
@@ -132,22 +125,13 @@
                             bg-gradient-warning
                          @else
                             bg-gradient-secondary
-    @endif
+                        @endif
 
 
 
                           ">{{ $personal_document->doc_currently_live_status }}</span>
                         </td>
-{{--                         <td class="align-middle text-center">
-                          <div class="ms-auto text-end">
-                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                          </div>
-                        </td> --}}
-
                         @endif
-
-
                   </tr>
                   <tr>
                     <td>
@@ -156,7 +140,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Birth Certificate with English Translation <span class="text-danger">(Required)</span></h6>
+                          <h6 class="mb-0 text-sm">Birth Certificate with English Translation <span class="text-danger">*</span></h6>
                           <p class="text-xs text-secondary mb-0"></p>
                         </div>
                       </div>
@@ -175,28 +159,16 @@
 
                       @if($personal_document->doc_birth_certificate_status == 'verified')
                       bg-gradient-success
-@elseif($personal_document->doc_birth_certificate_status == 'rejected')
-                        bg-gradient-danger
-@elseif($personal_document->doc_birth_certificate_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary
-@endif
-
-
-
+                        @elseif($personal_document->doc_birth_certificate_status == 'rejected')
+                                                bg-gradient-danger
+                        @elseif($personal_document->doc_birth_certificate_status == 'pending')
+                                                bg-gradient-warning
+                        @else
+                                                bg-gradient-secondary
+                        @endif
                       ">{{ $personal_document->doc_birth_certificate_status }}</span>
                     </td>
-{{--                     <td class="align-middle text-center">
-                      <div class="ms-auto text-end">
-                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                      </div>
-                    </td> --}}
-
                     @endif
-
-
                   </tr>
                   <tr>
                     <td>
@@ -224,24 +196,16 @@
 
                       @if($personal_document->doc_marriage_certificate_status == 'verified')
                       bg-gradient-success
-@elseif($personal_document->doc_marriage_certificate_status == 'rejected')
-                        bg-gradient-danger
-@elseif($personal_document->doc_marriage_certificate_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary
-@endif
-
-
+                        @elseif($personal_document->doc_marriage_certificate_status == 'rejected')
+                                                bg-gradient-danger
+                        @elseif($personal_document->doc_marriage_certificate_status == 'pending')
+                                                bg-gradient-warning
+                        @else
+                                                bg-gradient-secondary
+                        @endif
                       ">{{ $personal_document->doc_marriage_certificate_status }}</span>
                     </td>
-{{--                     <td class="align-middle text-center">
-                      <div class="ms-auto text-end">
-                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                      </div>
-                    </td>
- --}}
+
                     @endif
 
                   </tr>
@@ -273,27 +237,18 @@
 
                       @if($personal_document->doc_birth_certificate_children_status == 'verified')
                       bg-gradient-success
-@elseif($personal_document->doc_birth_certificate_children_status == 'rejected')
-                        bg-gradient-danger
-@elseif($personal_document->doc_birth_certificate_children_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary
-@endif
+                        @elseif($personal_document->doc_birth_certificate_children_status == 'rejected')
+                                                bg-gradient-danger
+                        @elseif($personal_document->doc_birth_certificate_children_status == 'pending')
+                                                bg-gradient-warning
+                        @else
+                                                bg-gradient-secondary
+                        @endif
 
 
                       ">{{ $personal_document->doc_birth_certificate_children_status }}</span>
+                      @endif
                     </td>
-{{--                     <td class="align-middle text-center">
-                      <div class="ms-auto text-end">
-                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                      </div>
-                    </td> --}}
-
-                    @endif
-
-
                   </tr>
                   <tr>
                     <td>
@@ -321,24 +276,15 @@
 
                       @if($personal_document->doc_birth_certificate_children_status == 'verified')
                       bg-gradient-success
-@elseif($personal_document->doc_birth_certificate_children_status == 'rejected')
-                        bg-gradient-danger
-@elseif($personal_document->doc_previous_visa_refusals_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary
-@endif
-
-
+                        @elseif($personal_document->doc_birth_certificate_children_status == 'rejected')
+                                                bg-gradient-danger
+                        @elseif($personal_document->doc_previous_visa_refusals_status == 'pending')
+                                                bg-gradient-warning
+                        @else
+                                                bg-gradient-secondary
+                        @endif
                       ">{{ $personal_document->doc_previous_visa_refusals_status }}</span>
                     </td>
-{{--                     <td class="align-middle text-center">
-                      <div class="ms-auto text-end">
-                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                      </div>
-                    </td> --}}
-
                     @endif
 
                   </tr>
@@ -370,25 +316,15 @@
 
                       @if($personal_document->doc_vaccination_proof_status == 'verified')
                       bg-gradient-success
-@elseif($personal_document->doc_vaccination_proof_status == 'rejected')
-                        bg-gradient-danger
-@elseif($personal_document->doc_vaccination_proof_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary
-@endif
-
-
-
+                    @elseif($personal_document->doc_vaccination_proof_status == 'rejected')
+                                            bg-gradient-danger
+                    @elseif($personal_document->doc_vaccination_proof_status == 'pending')
+                                            bg-gradient-warning
+                    @else
+                                            bg-gradient-secondary
+                    @endif
                       ">{{ $personal_document->doc_vaccination_proof_status }}</span>
                     </td>
-{{--                     <td class="align-middle text-center">
-                      <div class="ms-auto text-end">
-                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                      </div>
-                    </td> --}}
-
                     @endif
 
                   </tr>
