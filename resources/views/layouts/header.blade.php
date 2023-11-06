@@ -9,9 +9,9 @@
             <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="">Contact Us</a>
           </li>
           <li class="nav-item d-flex align-items-center">
-            <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+            <a href="{{ route('user.profile') }}" class="nav-link text-body font-weight-bold px-0">
               <i class="fa fa-user me-sm-1"></i>
-              <span class="d-sm-inline d-none">Profile</span>
+              <span class="d-sm-inline d-none"> {{ auth()->user()->name}}</span>
             </a>
           </li>
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
