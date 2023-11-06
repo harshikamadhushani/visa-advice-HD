@@ -212,7 +212,6 @@
         </div>
       </div>
 
-
       <div class="row my-4 ">
         <div class="col-lg-12 col-md-6 mb-md-0 mb-4">
           <div class="card">
@@ -228,248 +227,74 @@
 
 
             <div class="card-body px-0 pb-2">
-              <div class="table-responsive">
-                <table class="table align-items-center mb-0">
-                  <thead>
-                    <tr>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profile</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">User Name</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Id Number</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Visa Number</th>
-                      <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Email</th>
-                      <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-6 ">Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <a href="./userprofile.html" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-1.jpg" alt="team1">
-                          </a>
+                <div class="table-responsive">
+                  <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profile</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">User Name</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Mobile No</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Passport Number</th>
+                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Email</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-6 ">Actions</th>
+                      </tr>
+                    </thead>
 
-                        </div>
-                      </td>
+                        @foreach ($users as $user )
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @if ($user->profile_pic)
+                                    <div class="avatar-group mt-2">
+                                        <a href="{{ route('getUser', $user->id) }}" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $user->name }}">
+                                            <img src="{{ asset('build/assets/img/profile_pic/' . $user->profile_pic) }}">
+                                        </a>
 
-                      <td>
-                        <div class="d-flex  py-2 px-3">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">User One</h6>
-                          </div>
-                        </div>
-                      </td>
+                                    </div>
+                                    @else
+                                    <div class="avatar-group mt-2">
+                                        <a href="{{ route('getUser', $user->id) }}" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="{{ $user->name }}">
+                                            <img src="{{ URL::asset('/build/assets/img/person-icon.png') }}">
+                                        </a>
+                                    </div>
+                                    @endif
+                                </td>
 
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
+                                <td>
+                                    <div class="d-flex py-2 px-3">
+                                        <div class="d-flex flex-column justify-content-center">
+                                            <h6 class="mb-0 text-sm">{{ $user->name }}</h6>
+                                        </div>
+                                    </div>
+                                </td>
 
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-xs font-weight-bold">{{ $user->mobile_no }}</span>
+                                </td>
 
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">userOne@gmail.com </span>
-                      </td>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-xs font-weight-bold">{{ $user->passport_no }}</span>
+                                </td>
 
-                      <td class="align-middle">
-                        <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto " >
-                          <a class="btn btn-link badge badge-xm bg-gradient-primary" >Download</a>
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-1.jpg" alt="team1">
-                          </a>
+                                <td class="align-middle text-center text-sm">
+                                    <span class="text-xs font-weight-bold">{{ $user->email }}</span>
+                                </td>
 
-                        </div>
-                      </td>
+                                <td class="align-middle">
+                                    <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto">
+                                        <a class="btn btn-link badge badge-xm bg-gradient-success" href="profile.html">Download</a>
+                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
 
-                      <td>
-                        <div class="d-flex px-3 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">User One</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">userOne@gmail.com </span>
-                      </td>
-
-                      <td class="align-middle">
-                        <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto " >
-                          <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-1.jpg" alt="team1">
-                          </a>
-
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex px-3 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">User One</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">userOne@gmail.com </span>
-                      </td>
-
-                      <td class="align-middle">
-                        <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto " >
-                          <a class="btn btn-link badge badge-xm bg-gradient-primary" >Download</a>
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-1.jpg" alt="team1">
-                          </a>
-
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex px-3 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">User One</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">userOne@gmail.com </span>
-                      </td>
-
-                      <td class="align-middle">
-                        <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto " >
-                          <a class="btn btn-link badge badge-xm bg-gradient-primary" >Download</a>
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-1.jpg" alt="team1">
-                          </a>
-
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex px-3 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">User One</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">userOne@gmail.com </span>
-                      </td>
-
-                      <td class="align-middle">
-                        <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto " >
-                          <a class="btn btn-link badge badge-xm bg-gradient-primary" >Download</a>
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <div class="avatar-group mt-2">
-                          <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ryan Tompson">
-                            <img src="../assets/img/team-1.jpg" alt="team1">
-                          </a>
-
-                        </div>
-                      </td>
-
-                      <td>
-                        <div class="d-flex px-3 py-1">
-                          <div class="d-flex flex-column justify-content-center">
-                            <h6 class="mb-0 text-sm">User One</h6>
-                          </div>
-                        </div>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">1569863215</span>
-                      </td>
-
-                      <td class="align-middle text-center text-sm">
-                        <span class="text-xs font-weight-bold">userOne@gmail.com </span>
-                      </td>
-
-                      <td class="align-middle">
-                        <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto " >
-                          <a class="btn btn-link badge badge-xm bg-gradient-primary" >Download</a>
-                          <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
-                        </div>
-                      </td>
-                    </tr>
+                        @endforeach
 
 
-
-                  </tbody>
-                </table>
+                  </table>
+                </div>
               </div>
-            </div>
             <a class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 " style="padding: 10px; text-decoration: underline; cursor: pointer; margin-left: 1000px;" href="personaldc.html">View More</a>
           </div>
 
