@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmploymentDocumnetsController;
 use App\Http\Controllers\FinancialDocumentsController;
 use App\Http\Controllers\PersonalDocumentsController;
 use App\Http\Controllers\ProfileController;
@@ -43,6 +44,11 @@ Route::middleware('auth')->group(function () {
             Route::put('/update/{id}', [FinancialDocumentsController::class, 'update'])->name('financial.documents.update');
         });
 
+        Route::prefix('/employment-documents')->group(function () {
+            Route::get('/', [EmploymentDocumnetsController::class, 'index'])->name('employment.documents.index');
+            Route::post('/store', [EmploymentDocumnetsController::class, 'store'])->name('employment.documents.store');
+            Route::put('/update/{id}', [EmploymentDocumnetsController::class, 'update'])->name('employment.documents.update');
+        });
     });
 
     Route::middleware('role:admin')->prefix('/admin')->group(function () {
