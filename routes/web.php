@@ -4,6 +4,7 @@ use App\Http\Controllers\EmploymentDocumnetsController;
 use App\Http\Controllers\FinancialDocumentsController;
 use App\Http\Controllers\PersonalDocumentsController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SponsorVisitDocumnetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -49,6 +50,13 @@ Route::middleware('auth')->group(function () {
             Route::post('/store', [EmploymentDocumnetsController::class, 'store'])->name('employment.documents.store');
             Route::put('/update/{id}', [EmploymentDocumnetsController::class, 'update'])->name('employment.documents.update');
         });
+
+        Route::prefix('/sponsor-visit-documents')->group(function () {
+            Route::get('/', [SponsorVisitDocumnetController::class, 'index'])->name('sponsor.visit.documents.index');
+            Route::post('/store', [SponsorVisitDocumnetController::class, 'store'])->name('sponsor.visit.documents.store');
+            Route::put('/update/{id}', [SponsorVisitDocumnetController::class, 'update'])->name('sponsor.visit.documents.update');
+        });
+
     });
 
     Route::middleware('role:admin')->prefix('/admin')->group(function () {
