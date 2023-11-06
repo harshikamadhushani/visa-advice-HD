@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EmploymentDocumnetsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FinancialDocumentsController;
 use App\Http\Controllers\PersonalDocumentsController;
 use App\Http\Controllers\ProfileController;
@@ -65,6 +66,11 @@ Route::middleware('auth')->group(function () {
         })->name('admin.dashboard');
 
     });
+    Route::prefix('/personal-documents')->group(function () {
+        Route::get('/get-all-user', [AdminController::class, 'allUsers'])->name('allUsers');
+
+    });
+
 
 });
 
