@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmploymentDocumnetsController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FinancialDocumentsController;
+use App\Http\Controllers\NonSponsorVisitController;
 use App\Http\Controllers\PersonalDocumentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SponsorVisitDocumnetController;
@@ -53,10 +54,16 @@ Route::middleware('auth')->group(function () {
             Route::put('/update/{id}', [EmploymentDocumnetsController::class, 'update'])->name('employment.documents.update');
         });
 
-        Route::prefix('/sponsor-visit-documents')->group(function () {
+        Route::prefix('/sponsor-visit')->group(function () {
             Route::get('/', [SponsorVisitDocumnetController::class, 'index'])->name('sponsor.visit.documents.index');
             Route::post('/store', [SponsorVisitDocumnetController::class, 'store'])->name('sponsor.visit.documents.store');
             Route::put('/update/{id}', [SponsorVisitDocumnetController::class, 'update'])->name('sponsor.visit.documents.update');
+        });
+
+        Route::prefix('/non-sponsor-visit-doc')->group(function () {
+            Route::get('/', [NonSponsorVisitController::class, 'index'])->name('non.sponsor.visit.documents.index');
+            Route::post('/store', [NonSponsorVisitController::class, 'store'])->name('non.sponsor.visit.documents.store');
+            Route::put('/update/{id}', [NonSponsorVisitController::class, 'update'])->name('non.sponsor.visit.documents.update');
         });
 
         Route::prefix('/profile')->group(function () {

@@ -20,3 +20,6 @@ yarn-error.log
 /public/build/financial_documents
 /public/build/employment_documents
 /public/build/sponsor_visit
+/public/build/non_sponsor_visit
+/public/build/assets/img/profile_pic
+
