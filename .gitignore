@@ -18,3 +18,4 @@ yarn-error.log
 /.vscode
 /public/build/personal_documents
 /public/build/financial_documents
+/public/build/employment_documents
