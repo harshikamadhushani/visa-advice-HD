@@ -36,7 +36,7 @@
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                     @endif
                   </tr>
-                  
+
                 </thead>
                 @if(empty($personal_document))
                 <form  method="post" action="{{ route('personal.documents.store') }}" enctype="multipart/form-data">
@@ -242,6 +242,7 @@
 
 
                       ">{{ $personal_document->doc_birth_certificate_children_status }}</span>
+                      @endif
                     </td>
                   </tr>
                   <tr>
