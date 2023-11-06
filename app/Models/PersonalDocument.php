@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class PersonalDocument extends Model
 {
     use HasFactory, SoftDeletes;
-
+    protected $table = 'personal_documents';
     protected $fillable = [
         'user_id',
         'doc_current_or_previous_passport',

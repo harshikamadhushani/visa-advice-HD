@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Login
+    Personal Documentations
 @endsection
 
 @section('css')
