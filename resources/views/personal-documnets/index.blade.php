@@ -59,7 +59,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Current Passports and Previous Passport</h6>
+                          <h6 class="mb-0 text-sm">Current Passports and Previous Passport <span class="text-danger">(Required)</span></h6>
                           <p class="text-xs text-secondary mb-0">jpeg</p>
                         </div>
                       </div>
@@ -106,7 +106,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Documents showing where you live currently</h6>
+                          <h6 class="mb-0 text-sm">Documents showing where you live currently <span class="text-danger">(Required)</span></h6>
                           <p class="text-xs text-secondary mb-0"> Property deed or tenancy agreement is required for the visa application.</p>
                         </div>
                       </div>
@@ -124,13 +124,13 @@
                           <span class="badge badge-sm
 
 
-                          @if($personal_document->doc_currently_live_status == 'verified')
+                       @if($personal_document->doc_currently_live_status == 'verified')
                           bg-gradient-success
-    @elseif($personal_document->doc_currently_live_status == 'rejected')
+                         @elseif($personal_document->doc_currently_live_status == 'rejected')
                             bg-gradient-danger
-    @elseif($personal_document->doc_currently_live_status == 'pending')
+                         @elseif($personal_document->doc_currently_live_status == 'pending')
                             bg-gradient-warning
-    @else
+                         @else
                             bg-gradient-secondary
     @endif
 
@@ -156,7 +156,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Birth Certificate with English Translation</h6>
+                          <h6 class="mb-0 text-sm">Birth Certificate with English Translation <span class="text-danger">(Required)</span></h6>
                           <p class="text-xs text-secondary mb-0"></p>
                         </div>
                       </div>
