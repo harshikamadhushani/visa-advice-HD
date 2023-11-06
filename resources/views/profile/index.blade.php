@@ -13,10 +13,18 @@
         <div class="card card-body blur shadow-blur mx-4 mt-n6 overflow-hidden">
             <div class="row gx-4">
                 <div class="col-auto">
+                    @if ($profile->profile_pic)
+
                     <div class="avatar avatar-xl position-relative">
                         <img src="{{ URL::asset('/build/assets/img/profile_pic/' . $profile->profile_pic) }}"
                             alt="profile_image" class="w-100 border-radius-lg shadow-sm">
                     </div>
+                    @else
+                    <div class="avatar avatar-xl position-relative">
+                        <img src="{{ URL::asset('/build/assets/img/person-icon.png') }}"
+                            alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                    </div>
+                    @endif
                 </div>
                 <div class="col-auto my-auto">
                     <div class="h-100">
