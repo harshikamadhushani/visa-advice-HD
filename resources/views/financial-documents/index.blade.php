@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('title')
-    Financial Developments
+    Financial Documents
 @endsection
 
 @section('css')
@@ -14,6 +14,7 @@
 @endsection
 
 @section('content')
+<h3>Financial Documentations</h3>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">
