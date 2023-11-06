@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FinancialDocumentsController;
 use App\Http\Controllers\PersonalDocumentsController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,12 +33,16 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('/personal-documents')->group(function () {
             Route::get('/', [PersonalDocumentsController::class, 'index'])->name('personal.documents.index');
-            Route::get('/create', [PersonalDocumentsController::class, 'create'])->name('personal.documents.create');
             Route::post('/store', [PersonalDocumentsController::class, 'store'])->name('personal.documents.store');
-            Route::get('/edit/{id}', [PersonalDocumentsController::class, 'edit'])->name('personal.documents.edit');
             Route::put('/update/{id}', [PersonalDocumentsController::class, 'update'])->name('personal.documents.update');
-            Route::delete('/destroy/{id}', [PersonalDocumentsController::class, 'destroy'])->name('personal.documents.destroy');
         });
+
+        Route::prefix('/financial-documents')->group(function () {
+            Route::get('/', [FinancialDocumentsController::class, 'index'])->name('financial.documents.index');
+            Route::post('/store', [FinancialDocumentsController::class, 'store'])->name('financial.documents.store');
+            Route::put('/update/{id}', [FinancialDocumentsController::class, 'update'])->name('financial.documents.update');
+        });
+
     });
 
     Route::middleware('role:admin')->prefix('/admin')->group(function () {
