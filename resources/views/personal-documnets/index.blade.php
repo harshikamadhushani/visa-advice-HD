@@ -11,6 +11,11 @@
         margin-top: 15px;
         margin-left: 10px;
     }
+
+    .text-danger {
+       color: red;
+      font-weight: bold;
+      }
 </style>
 
 @endsection
@@ -56,7 +61,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Current Passports and Previous Passport <span class="text-danger">(Required)</span></h6>
+                          <h6 class="mb-0 text-sm">Current Passports and Previous Passport <span class="text-danger">*</span></h6>
                           <p class="text-xs text-secondary mb-0">jpeg</p>
                         </div>
                       </div>
@@ -94,7 +99,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Documents showing where you live currently <span class="text-danger">(Required)</span></h6>
+                          <h6 class="mb-0 text-sm">Documents showing where you live currently <span class="text-danger">*</span></h6>
                           <p class="text-xs text-secondary mb-0"> Property deed or tenancy agreement is required for the visa application.</p>
                         </div>
                       </div>
@@ -135,7 +140,7 @@
 
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Birth Certificate with English Translation <span class="text-danger">(Required)</span></h6>
+                          <h6 class="mb-0 text-sm">Birth Certificate with English Translation <span class="text-danger">*</span></h6>
                           <p class="text-xs text-secondary mb-0"></p>
                         </div>
                       </div>
