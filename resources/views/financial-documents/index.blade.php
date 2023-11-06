@@ -73,29 +73,25 @@
                                             <p class="text-xs font-weight-bold mb-0">
                                             <div class="mb-3">
                                                 <input class="form-control" type="file" id="formFile"
-                                                    name="saving_account" @if(!empty($financial_document) && ($financial_document->doc_saving_account_status == 'pending' || $financial_document->doc_saving_account_status == 'verified') ) disabled @endif>
+                                                    name="saving_account" @if (
+                                                        !empty($financial_document) &&
+                                                            ($financial_document->doc_saving_account_status == 'pending' ||
+                                                                $financial_document->doc_saving_account_status == 'verified')) disabled @endif>
                                             </div>
                                             </p>
-
-
-                                        </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span
-                                                class="badge badge-sm
-
-@if ($financial_document->doc_saving_account_status == 'verified') bg-gradient-success
-@elseif($financial_document->doc_saving_account_status == 'rejected')
-                        bg-gradient-danger
-@elseif($financial_document->doc_saving_account_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary @endif
-                      ">{{ $financial_document->doc_saving_account_status }}</span>
-
-
                                         </td>
 
-
+                                        @if (!empty($financial_document))
+                                            <td class="align-middle text-center text-sm">
+                                                <span
+                                                    class="badge badge-sm
+                                                    @if ($financial_document->doc_saving_account_status == 'verified') bg-gradient-success
+                                                    @elseif($financial_document->doc_saving_account_status == 'rejected') bg-gradient-danger
+                                                    @elseif($financial_document->doc_saving_account_status == 'pending') bg-gradient-warning
+                                                    @else bg-gradient-secondary @endif ">{{ $financial_document->doc_saving_account_status }}
+                                                </span>
+                                            </td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>
@@ -116,31 +112,27 @@
                                             <p class="text-xs font-weight-bold mb-0">
                                             <div class="mb-3">
                                                 <input class="form-control" type="file" id="formFile"
-                                                    name="fixed_deposit_accounts" @if(!empty($financial_document) && ($financial_document->doc_fixed_deposit_accounts_status == 'pending' || $financial_document->doc_fixed_deposit_accounts_status == 'verified') ) disabled @endif>
+                                                    name="fixed_deposit_accounts"
+                                                    @if (
+                                                        !empty($financial_document) &&
+                                                            ($financial_document->doc_fixed_deposit_accounts_status == 'pending' ||
+                                                                $financial_document->doc_fixed_deposit_accounts_status == 'verified')) disabled @endif>
                                             </div>
                                             </p>
 
                                         </td>
 
-                                        <td class="align-middle text-center text-sm">
-                                            <span
-                                                class="badge badge-sm
-
-
-                                            @if ($financial_document->doc_fixed_deposit_accounts_status == 'verified') bg-gradient-success
-@elseif($financial_document->doc_fixed_deposit_accounts_status == 'rejected')
-                        bg-gradient-danger
-@elseif($financial_document->doc_fixed_deposit_accounts_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary @endif
-                      ">{{ $financial_document->doc_fixed_deposit_accounts_status }}</span>
-
-
-                                        </td>
-
-
-
+                                        @if (!empty($financial_document))
+                                            <td class="align-middle text-center text-sm">
+                                                <span
+                                                    class="badge badge-sm
+                                                @if ($financial_document->doc_fixed_deposit_accounts_status == 'verified') bg-gradient-success
+                                                @elseif($financial_document->doc_fixed_deposit_accounts_status == 'rejected') bg-gradient-danger
+                                                @elseif($financial_document->doc_fixed_deposit_accounts_status == 'pending') bg-gradient-warning
+                                                @else bg-gradient-secondary @endif">{{ $financial_document->doc_fixed_deposit_accounts_status }}
+                                                </span>
+                                            </td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>
@@ -160,33 +152,27 @@
                                             <p class="text-xs font-weight-bold mb-0">
                                             <div class="mb-3">
                                                 <input class="form-control" type="file" id="formFile"
-                                                    name="current_accounts" @if(!empty($financial_document) && ($financial_document->doc_current_accounts_status == 'pending' || $financial_document->doc_current_accounts_status == 'verified') ) disabled @endif>
+                                                    name="current_accounts"
+                                                    @if (
+                                                        !empty($financial_document) &&
+                                                            ($financial_document->doc_current_accounts_status == 'pending' ||
+                                                                $financial_document->doc_current_accounts_status == 'verified')) disabled @endif>
                                             </div>
                                             </p>
 
                                         </td>
 
-
-                                        <td class="align-middle text-center text-sm">
-                                            <span
-                                                class="badge badge-sm
-
-@if ($financial_document->doc_current_accounts_status == 'verified')
-bg-gradient-success
-@elseif($financial_document->doc_current_accounts_status == 'rejected')
-                        bg-gradient-danger
-@elseif($financial_document->doc_current_accounts_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary @endif
-                      ">{{ $financial_document->doc_current_accounts_status }}</span>
-
-
-                                        </td>
-
-
-
-
+                                        @if (!empty($financial_document))
+                                            <td class="align-middle text-center text-sm">
+                                                <span
+                                                    class="badge badge-sm
+                                                @if ($financial_document->doc_current_accounts_status == 'verified') bg-gradient-success
+                                                @elseif($financial_document->doc_current_accounts_status == 'rejected') bg-gradient-danger
+                                                @elseif($financial_document->doc_current_accounts_status == 'pending') bg-gradient-warning
+                                                @else bg-gradient-secondary @endif">{{ $financial_document->doc_current_accounts_status }}
+                                                </span>
+                                            </td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>
@@ -205,29 +191,26 @@ bg-gradient-success
                                             <p class="text-xs font-weight-bold mb-0">
                                             <div class="mb-3">
                                                 <input class="form-control" type="file" id="formFile"
-                                                    name="money_of_credit_cards" @if(!empty($financial_document) && ($financial_document->doc_money_of_credit_cards_status == 'pending' || $financial_document->doc_money_of_credit_cards_status == 'verified') ) disabled @endif>
+                                                    name="money_of_credit_cards"
+                                                    @if (
+                                                        !empty($financial_document) &&
+                                                            ($financial_document->doc_money_of_credit_cards_status == 'pending' ||
+                                                                $financial_document->doc_money_of_credit_cards_status == 'verified')) disabled @endif>
                                             </div>
                                             </p>
                                         </td>
-                                                                                <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm
-
-                                            @if ($financial_document->doc_money_of_credit_cards_status == 'verified')
-bg-gradient-success
-@elseif($financial_document->doc_money_of_credit_cards_status == 'rejected')
-                        bg-gradient-danger
-@elseif($financial_document->doc_money_of_credit_cards_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary @endif
-                      ">{{ $financial_document->doc_money_of_credit_cards_status }}</span>
-
-
+                                        @if (!empty($financial_document))
+                                            <td class="align-middle text-center text-sm">
+                                                <span
+                                                    class="badge badge-sm
+                                                @if ($financial_document->doc_money_of_credit_cards_status == 'verified') bg-gradient-success
+                                                @elseif($financial_document->doc_money_of_credit_cards_status == 'rejected') bg-gradient-danger
+                                                @elseif($financial_document->doc_money_of_credit_cards_status == 'pending') bg-gradient-warning
+                                                @else bg-gradient-secondary @endif">
+                                                    {{ $financial_document->doc_money_of_credit_cards_status }}
+                                                </span>
+                                        @endif
                                         </td>
-
-
-
-
                                     </tr>
                                     <tr>
                                         <td>
@@ -245,29 +228,25 @@ bg-gradient-success
                                         <td>
                                             <p class="text-xs font-weight-bold mb-0">
                                             <div class="mb-3">
-                                                <input class="form-control" type="file" id="formFile" name="insurance" @if(!empty($financial_document) && ($financial_document->doc_insurance_status == 'pending' || $financial_document->doc_insurance_status == 'verified') ) disabled @endif>
+                                                <input class="form-control" type="file" id="formFile" name="insurance"
+                                                    @if (
+                                                        !empty($financial_document) &&
+                                                            ($financial_document->doc_insurance_status == 'pending' ||
+                                                                $financial_document->doc_insurance_status == 'verified')) disabled @endif>
                                             </div>
                                             </p>
                                         </td>
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm
-
-                                            @if ($financial_document->doc_insurance_status == 'verified')
-bg-gradient-success
-@elseif($financial_document->doc_insurance_status == 'rejected')
-                        bg-gradient-danger
-@elseif($financial_document->doc_insurance_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary @endif
-                      ">{{ $financial_document->doc_insurance_status }}</span>
-
-
-
-                                        </td>
-
-
-
+                                        @if (!empty($financial_document))
+                                            <td class="align-middle text-center text-sm">
+                                                <span
+                                                    class="badge badge-sm
+                                                @if ($financial_document->doc_insurance_status == 'verified') bg-gradient-success
+                                                @elseif($financial_document->doc_insurance_status == 'rejected') bg-gradient-danger
+                                                @elseif($financial_document->doc_insurance_status == 'pending') bg-gradient-warning
+                                                @else bg-gradient-secondary @endif">{{ $financial_document->doc_insurance_status }}
+                                                </span>
+                                            </td>
+                                        @endif
                                     </tr>
                                     <tr>
                                         <td>
@@ -287,30 +266,28 @@ bg-gradient-success
                                             <p class="text-xs font-weight-bold mb-0">
                                             <div class="mb-3">
                                                 <input class="form-control" type="file" id="formFile"
-                                                    name="evidence_of_assets" @if(!empty($financial_document) && ($financial_document->doc_evidence_of_assets_status == 'pending' || $financial_document->doc_evidence_of_assets_status == 'verified') ) disabled @endif>
+                                                    name="evidence_of_assets"
+                                                    @if (
+                                                        !empty($financial_document) &&
+                                                            ($financial_document->doc_evidence_of_assets_status == 'pending' ||
+                                                                $financial_document->doc_evidence_of_assets_status == 'verified')) disabled @endif>
                                             </div>
                                             </p>
                                         </td>
 
-                                        <td class="align-middle text-center text-sm">
-                                            <span class="badge badge-sm
-
-                                            @if ($financial_document->doc_evidence_of_assets_status == 'verified')
-bg-gradient-success
-@elseif($financial_document->doc_evidence_of_assets_status == 'rejected')
-                        bg-gradient-danger
-@elseif($financial_document->doc_evidence_of_assets_status == 'pending')
-                        bg-gradient-warning
-@else
-                        bg-gradient-secondary @endif
-                      ">{{ $financial_document->doc_evidence_of_assets_status }}</span>
-
-                                        </td>
-
-
+                                        @if (!empty($financial_document))
+                                            <td class="align-middle text-center text-sm">
+                                                <span
+                                                    class="badge badge-sm
+                                                @if ($financial_document->doc_evidence_of_assets_status == 'verified') bg-gradient-success
+                                                @elseif($financial_document->doc_evidence_of_assets_status == 'rejected') bg-gradient-danger
+                                                @elseif($financial_document->doc_evidence_of_assets_status == 'pending') bg-gradient-warning
+                                                @else bg-gradient-secondary @endif">
+                                                    {{ $financial_document->doc_evidence_of_assets_status }}
+                                                </span>
+                                            </td>
+                                        @endif
                                     </tr>
-
-
                                 </tbody>
                             </table>
                         </div>
