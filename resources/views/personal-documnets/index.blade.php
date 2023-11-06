@@ -21,7 +21,7 @@
 @endsection
 
 @section('content')
-<h3>  Personal Documentations</h3>
+<h3 style="margin-left: 3%;">Personal Documentations</h3>
 <div class="container-fluid py-4">
     <div class="row">
       <div class="col-12">

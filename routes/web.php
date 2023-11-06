@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\EmploymentDocumnetsController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\FinancialDocumentsController;
 use App\Http\Controllers\PersonalDocumentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SponsorVisitDocumnetController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -57,6 +59,11 @@ Route::middleware('auth')->group(function () {
             Route::put('/update/{id}', [SponsorVisitDocumnetController::class, 'update'])->name('sponsor.visit.documents.update');
         });
 
+        Route::prefix('/profile')->group(function () {
+            Route::get('/', [UserProfileController::class, 'index'])->name('user.profile');
+            Route::put('/update{id}', [UserProfileController::class, 'update'])->name('user.profile.update');
+
+        });
     });
 
     Route::middleware('role:admin')->prefix('/admin')->group(function () {
@@ -65,6 +72,11 @@ Route::middleware('auth')->group(function () {
         })->name('admin.dashboard');
 
     });
+    Route::prefix('/personal-documents')->group(function () {
+        Route::get('/get-all-user', [AdminController::class, 'allUsers'])->name('allUsers');
+
+    });
+
 
 });
 

@@ -19,7 +19,7 @@
 @endsection
 
 @section('content')
-<h3>Financial Documentations</h3>
+<h3 style="margin-left: 3%;">Financial Documentations</h3>
     <div class="container-fluid py-4">
         <div class="row">
             <div class="col-12">

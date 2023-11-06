@@ -1,19 +1,15 @@
 <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" navbar-scroll="true">
     <div class="container-fluid py-1 px-3">
-      <nav aria-label="breadcrumb">
-        <h6 class="font-weight-bolder mb-0"></h6>
-      </nav>
+      <div class="ms-md-auto pe-md-4 d-flex align-items-center">
+        <div class="input-group">
+          <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
+          <input type="text" class="form-control" placeholder="Type here...">
+        </div>
+      </div>
+      <!-- End Search Bar -->
 
         <ul class="navbar-nav  justify-content-end">
-          <li class="nav-item d-flex align-items-center">
-            <a class="btn btn-outline-primary btn-sm mb-0 me-3" target="_blank" href="">Contact Us</a>
-          </li>
-          <li class="nav-item d-flex align-items-center">
-            <a href="{{ route('user.profile') }}" class="nav-link text-body font-weight-bold px-0">
-              <i class="fa fa-user me-sm-1"></i>
-              <span class="d-sm-inline d-none"> {{ auth()->user()->name}}</span>
-            </a>
-          </li>
+
           <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
             <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
               <div class="sidenav-toggler-inner">
