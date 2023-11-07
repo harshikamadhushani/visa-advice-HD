@@ -115,7 +115,7 @@
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
                                                 <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                    href="{{ route('checkDoc',$data->id) }}"><i class="far fa-eye-alt me-2"></i>View</a>
                                             </div>
                                         </td>
                                     </tr>
