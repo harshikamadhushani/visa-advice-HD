@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use ZipArchive;
 
 class UserProfileController extends Controller
 {
-    public function index(){
+    public function index()
+    {
 
         $profile = User::where('id', auth()->user()->id)->first();
-        return view("profile.index",compact('profile'));
+        return view("profile.index", compact('profile'));
     }
 
     public function update(Request $request)
@@ -26,9 +28,8 @@ class UserProfileController extends Controller
 
         if ($request->hasFile('profile_pic')) {
             $file = $request->file('profile_pic');
-            $fileName = time() . '.' . uniqid() . '.' .$file->extension();
+            $fileName = time() . '.' . uniqid() . '.' . $file->extension();
             $file->move(public_path('build/assets/img/profile_pic/'), $fileName);
-
         }
 
         auth()->user()->update([
@@ -44,7 +45,44 @@ class UserProfileController extends Controller
         return redirect()->route('user.profile')->with('success', 'Profile updated successfully!');
     }
 
+    public function downloadPersonalDoc($id)
+    {
+        $download = \App\Models\PersonalDocument::where('user_id', $id)->first();
 
+        if (!$download) {
+            return abort(404);
+        }
 
+        $tempDirectory = storage_path('app/temp_zip');
+        if (!is_dir($tempDirectory)) {
+            mkdir($tempDirectory, 0755, true);
+        }
 
+        $zip = new ZipArchive;
+        $zipFileName = 'personal_documents.zip';
+        $zipFilePath = $tempDirectory . '/' . $zipFileName;
+
+        if ($zip->open($zipFilePath, ZipArchive::CREATE | ZipArchive::OVERWRITE)) {
+
+            $personal_documents = [
+                'doc_current_or_previous_passport' => $download->doc_current_or_previous_passport,
+                'doc_currently_live' => $download->doc_currently_live,
+            ];
+
+            foreach ($personal_documents as $fieldName => $filePath) {
+                if (!empty($filePath)) {
+                    $file = public_path("build/personal_documents/{$filePath}");
+                    if (file_exists($file)) {
+                        $zip->addFile($file, $fieldName . '.' . pathinfo($file, PATHINFO_EXTENSION));
+                    }
+                }
+            }
+
+            $zip->close();
+            
+            return response()->download($zipFilePath, $zipFileName)->deleteFileAfterSend(true);
+        } else {
+            return back()->with('ErrorMessage', 'Failed to create the zip file.');
+        }
+    }
 }

@@ -85,8 +85,6 @@
                 <div class="card z-index-2">
                     <div class="card-header pb-0">
                         <h6>Documents</h6>
-
-
                     </div>
                     <div class="card-body p-3">
                         <div class="chart">
@@ -95,6 +93,7 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">
                                             Document Type</th>
+
                                         <th
                                             class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-6 ">
                                             Actions</th>
@@ -113,9 +112,9 @@
 
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
-                                                <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                <a href="{{ route('download.personal.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
+                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
                                             </div>
                                         </td>
                                     </tr>
@@ -131,9 +130,9 @@
 
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
-                                                <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                <a href="{{ route('download.financial.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
+                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
                                             </div>
                                         </td>
                                     </tr>
@@ -150,8 +149,8 @@
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
                                             </div>
                                         </td>
 
@@ -170,8 +169,8 @@
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
                                             </div>
                                         </td>
                                     </tr>
@@ -188,8 +187,8 @@
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
                                             </div>
                                         </td>
 
