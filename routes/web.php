@@ -84,15 +84,20 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/download')->group(function () {
             Route::get('/personal-documents/{id}', [DownloadController::class, 'downloadPersonalDocuments'])->name('download.personal.documents');
             Route::get('/financial-document/{id}', [DownloadController::class, 'downloadFinancialDocuments'])->name('download.financial.documents');
-            
+
+        });
+        Route::prefix('/user')->group(function () {
+            Route::get('/get-all-user', [AdminController::class, 'allUsers'])->name('allUsers');
+            Route::get('/get-user{id}', [AdminController::class, 'getUser'])->name('getUser');
+            Route::get('/get-admin-details', [AdminController::class, 'getAdminDetails'])->name('getAdminDetails');
+
+            Route::get('/personal{id}', [PersonalDocumentsController::class, 'checkDoc'])->name('checkDoc');
+            Route::Post('/updateStatus/{id}', [PersonalDocumentsController::class, 'updateStatus'])->name('updateStatus');
+
         });
 
     });
-    Route::prefix('/user')->group(function () {
-        Route::get('/get-all-user', [AdminController::class, 'allUsers'])->name('allUsers');
-        Route::get('/get-user{id}', [AdminController::class, 'getUser'])->name('getUser');
-        Route::get('/get-admin-details', [AdminController::class, 'getAdminDetails'])->name('getAdminDetails');
-    });
+
 
 
 

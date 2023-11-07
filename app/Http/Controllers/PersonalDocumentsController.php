@@ -225,4 +225,89 @@ class PersonalDocumentsController extends Controller
     public function destroy()
     {
     }
+
+    public function checkDoc($id){
+        $user = PersonalDocument::where('user_id', $id)->get();
+     return view('personal-documnets.admin-access',compact('user'));
+    }
+    public function updateStatus($id, Request $request)
+    {
+        try {
+            $personalDocument = PersonalDocument::where('user_id', $id)->first();
+            if ($request->has('current_passport_accept')) {
+                $personalDocument->update([
+                    'doc_current_or_previous_passport_status' => 'verified'
+                ]);
+            }
+            if ($request->has('current_passport_reject')) {
+                $personalDocument->update([
+                    'doc_current_or_previous_passport_status' => 'rejected'
+                ]);
+            }
+            if ($request->has('document_show_accept')) {
+                $personalDocument->update([
+                    'doc_currently_live_status' => 'verified'
+                ]);
+            }
+            if ($request->has('document_show_reject')) {
+                $personalDocument->update([
+                    'doc_currently_live_status' => 'rejected'
+                ]);
+            }
+            if ($request->has('birth_cetificate_accept')) {
+                $personalDocument->update([
+                    'doc_birth_certificate_status' => 'verified'
+                ]);
+            }
+            if ($request->has('birth_cetificate_reject')) {
+                $personalDocument->update([
+                    'doc_birth_certificate_status' => 'rejected'
+                ]);
+            }
+            if ($request->has('marriage_certicate_accept')) {
+                $personalDocument->update([
+                    'doc_marriage_certificate_status' => 'verified'
+                ]);
+            }
+            if ($request->has('marriage_certicate_reject')) {
+                $personalDocument->update([
+                    'doc_marriage_certificate_status' => 'rejected'
+                ]);
+            }
+            if ($request->has('birth_certificate_children_accept')) {
+                $personalDocument->update([
+                    'doc_birth_certificate_children_status' => 'verified'
+                ]);
+            }
+            if ($request->has('birth_certificate_children_reject')) {
+                $personalDocument->update([
+                    'doc_birth_certificate_children_status' => 'rejected'
+                ]);
+            }
+            if ($request->has('visa_refusals_accept')) {
+                $personalDocument->update([
+                    'doc_previous_visa_refusals_status' => 'verified'
+                ]);
+            }
+            if ($request->has('visa_refusals_reject')) {
+                $personalDocument->update([
+                    'doc_previous_visa_refusals_status' => 'rejected'
+                ]);
+            }
+            if ($request->has('vaccination_accept')) {
+                $personalDocument->update([
+                    'doc_vaccination_proof_status' => 'verified'
+                ]);
+            }
+            if ($request->has('vaccination_reject')) {
+                $personalDocument->update([
+                    'doc_vaccination_proof_status' => 'rejected'
+                ]);
+            }
+            return redirect()->route('checkDoc', $id)->with('SuccessMessage', 'Documents have been submitted.');
+        } catch (Exception $e) {
+            Log::emergency("File: " . $e->getFile() . " Line: " . $e->getLine() . " Message: " . $e->getMessage());
+            return redirect()->back()->with('ErrorMessage', 'Technical Error. Please contact our Customer Service.');
+        }
+    }
 }
