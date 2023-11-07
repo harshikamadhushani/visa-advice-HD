@@ -241,7 +241,7 @@ class PersonalDocumentsController extends Controller
             }
             if ($request->has('current_passport_reject')) {
                 $personalDocument->update([
-                    'doc_current_or_previous_passport_status' => 'reject'
+                    'doc_current_or_previous_passport_status' => 'rejected'
                 ]);
             }
             if ($request->has('document_show_accept')) {
