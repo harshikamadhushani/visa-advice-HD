@@ -74,8 +74,8 @@
 
                             <td class="align-middle">
                                 <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto">
-                                    <a class="btn btn-link badge badge-xm bg-gradient-success" href="profile.html">Download</a>
-                                    <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                    <a class="btn btn-link badge badge-xm bg-gradient-success" href="{{ route('download.personal.documents', $user->id) }}">Download</a>
+                                    
                                 </div>
                             </td>
                         </tr>
