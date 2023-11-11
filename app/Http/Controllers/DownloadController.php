@@ -12,7 +12,7 @@ class DownloadController extends Controller
     public function downloadPersonalDocuments($id)
     {
 
-        $download = FinancialDocument::where('user_id', $id)->first();
+        $download = PersonalDocument::where('user_id', $id)->first();
 
         if (!$download) {
             return abort(404);

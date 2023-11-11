@@ -1,5 +1,4 @@
-@extends('layouts.app')
-
+@extends('layouts.admin-app')
 @section('title')
     Personal Documentations
 @endsection
@@ -59,9 +58,9 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button>Download</button>
-                                                    <button type='submit' name='current_passport_reject'>Reject</button>
-                                                    <button type='submit' name='current_passport_accept'>Accept</button>
+                                                    <button type="button" class="btn bg-gradient-primary text-white" >Download</button>
+                                                    <button type='submit' class="btn bg-gradient-danger text-white" name='current_passport_reject'>Reject</button>
+                                                    <button type='submit' class="btn bg-gradient-success text-white" name='current_passport_accept'>Accept</button>
                                                 </td>
                                             </tr>
 
@@ -82,9 +81,9 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button>Download</button>
-                                                    <button type='submit' name='document_show_reject'>Reject</button>
-                                                    <button type='submit' name='document_show_accept'>Accept</button>
+                                                    <button  class="btn bg-gradient-primary text-white">Download</button>
+                                                    <button  class="btn bg-gradient-danger text-white" type='submit' name='document_show_reject'>Reject</button>
+                                                    <button  class="btn bg-gradient-success text-white" type='submit' name='document_show_accept'>Accept</button>
                                                 </td>
 
 
@@ -105,9 +104,9 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button>Download</button>
-                                                    <button type='submit' name='birth_cetificate_reject'>Reject</button>
-                                                    <button type='submit' name='birth_cetificate_accept'>Accept</button>
+                                                    <button  class="btn bg-gradient-primary text-white" type="button" class="btn bg-primary">Download</button>
+                                                    <button  class="btn bg-gradient-danger text-white" type='submit' name='birth_cetificate_reject'>Reject</button>
+                                                    <button  class="btn bg-gradient-success text-white" type='submit' name='birth_cetificate_accept'>Accept</button>
                                                 </td>
 
                                             </tr>
@@ -125,9 +124,9 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button>Download</button>
-                                                    <button type='submit' name='marriage_certicate_reject'>Reject</button>
-                                                    <button type='submit' name='marriage_certicate_accept'>Accept</button>
+                                                    <button  class="btn bg-gradient-primary text-white">Download</button>
+                                                    <button  class="btn bg-gradient-danger text-white"  type='submit' name='marriage_certicate_reject'>Reject</button>
+                                                    <button  class="btn bg-gradient-success text-white" type='submit' name='marriage_certicate_accept'>Accept</button>
                                                 </td>
 
                                             </tr>
@@ -147,10 +146,9 @@
                                                 </td>
 
                                                 <td>
-                                                    <button>Download</button>
-                                                    <button type='submit'
-                                                        name='birth_certificate_children_reject'>Reject</button>
-                                                    <button type='submit'
+                                                    <button  class="btn bg-gradient-primary text-white">Download</button>
+                                                    <button  class="btn bg-gradient-danger text-white" type='submit' name='birth_certificate_children_reject'>Reject</button>
+                                                    <button type='submit'  class="btn bg-gradient-success text-white"
                                                         name='birth_certificate_children_accept'>Accept</button>
                                                 </td>
 
@@ -171,9 +169,9 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button>Download</button>
-                                                    <button type='submit' name='visa_refusals_reject' class=' bg-gradient-danger'>Reject</button>
-                                                    <button type='submit' name='visa_refusals_accept'>Accept</button>
+                                                    <button  class="btn bg-gradient-primary text-white">Download</button>
+                                                    <button  class="btn bg-gradient-danger text-white"type='submit' name='visa_refusals_reject' class=' bg-gradient-danger'>Reject</button>
+                                                    <button  class="btn bg-gradient-success text-white"type='submit' name='visa_refusals_accept'>Accept</button>
                                                 </td>
 
                                             </tr>
@@ -190,9 +188,9 @@
                                                     </div>
                                                 </td>
                                                 <td>
-                                                    <button>Download</button>
-                                                    <button type='submit' name='vaccination_reject'>Reject</button>
-                                                    <button type='submit' name='vaccination_accept'>Accept</button>
+                                                    <button  class="btn bg-gradient-primary text-white">Download</button>
+                                                    <button   class="btn bg-gradient-danger text-white"type='submit' name='vaccination_reject'>Reject</button>
+                                                    <button  class="btn bg-gradient-success text-white" type='submit' name='vaccination_accept'>Accept</button>
                                                 </td>
                                             </tr>
                                         </tbody>
