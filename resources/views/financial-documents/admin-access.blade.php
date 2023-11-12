@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.admin-app')
+
 
 @section('title')
     Financial Documents
@@ -259,9 +260,6 @@
                                 </tbody>
 
                             </table>
-                        </div>
-                        <div class="cus-submit-btn">
-                            <button class="btn btn-outline-primary btn-sm mb-0 me-3">Upload</button>
                         </div>
                     </div>
                 </div>

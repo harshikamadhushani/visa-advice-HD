@@ -102,6 +102,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/financial{id}', [FinancialDocumentsController::class, 'checkFinancialDoc'])->name('checkFinancialDoc');
             Route::get('/updateFinancialStatus/{id}/{status}/{name}', [FinancialDocumentsController::class, 'updateStatus'])->name('updateFinancialStatus');
 
+            Route::get('/employment{id}', [EmploymentDocumnetsController::class, 'checkEmploymentDoc'])->name('checkEmploymentDoc');
+            Route::get('/updateEmploymentStatus/{id}/{status}/{name}', [EmploymentDocumnetsController::class, 'updateStatus'])->name('updateEmployeeStatus');
+
         });
 
     });
