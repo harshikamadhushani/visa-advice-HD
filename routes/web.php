@@ -79,13 +79,16 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin')->prefix('/admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
 
-        Route::get('/personal-documents-download/{id}', [UserProfileController::class, 'downloadPersonalDoc'])->name('admin.personal.download'); // DEV
-
+        // Downloaded routes
         Route::prefix('/download')->group(function () {
             Route::get('/personal-documents/{id}', [DownloadController::class, 'downloadPersonalDocuments'])->name('download.personal.documents');
             Route::get('/financial-document/{id}', [DownloadController::class, 'downloadFinancialDocuments'])->name('download.financial.documents');
-
+            Route::get('/employment-document/{id}', [DownloadController::class, 'downloadEmploymentDocuments'])->name('download.employment.documents');
+            Route::get('/sponsor-document/{id}', [DownloadController::class, 'downloadSponsorDocuments'])->name('download.sponsor.documents');
+            Route::get('/non-sponsor-document/{id}', [DownloadController::class, 'downloadNonSponsorDocuments'])->name('download.non.sponsor.documents');
+            Route::get('/all-document/{id}', [DownloadController::class, 'downloadAllDocuments'])->name('download.all.documents');
         });
+
         Route::prefix('/user')->group(function () {
             Route::get('/get-all-user', [AdminController::class, 'allUsers'])->name('allUsers');
             Route::get('/get-user{id}', [AdminController::class, 'getUser'])->name('getUser');
