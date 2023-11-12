@@ -25,10 +25,10 @@ class NonSponsorVisitController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'receipt_of_hotel_reservation' => 'required|file|mimes:pdf,docx',
-            'evidence_of_sufficient_funds' => 'required|file|mimes:pdf,docx',
-            'travel_itinerary' => 'required|file|mimes:pdf,docx',
-            'life_insurance' => 'required|file|mimes:pdf,docx',
+            'receipt_of_hotel_reservation' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'evidence_of_sufficient_funds' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'travel_itinerary' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'life_insurance' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
         ]);
 
         try {
@@ -93,10 +93,10 @@ class NonSponsorVisitController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'receipt_of_hotel_reservation' => 'file|mimes:pdf,docx',
-            'evidence_of_sufficient_funds' => 'file|mimes:pdf,docx',
-            'travel_itinerary' => 'file|mimes:pdf,docx',
-            'life_insurance' => 'file|mimes:pdf,docx',
+            'receipt_of_hotel_reservation' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'evidence_of_sufficient_funds' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'travel_itinerary' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'life_insurance' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
         ]);
 
         try {
@@ -161,5 +161,25 @@ class NonSponsorVisitController extends Controller
     public function destroy()
     {
 
+    }
+
+    public function checkNonSponsorDoc($id){
+
+        $data = NonSponsorVisit::where('user_id', $id)->first();
+        return view('non-sponsor-visit-documents.admin-access',compact('data'));
+    }
+
+    public function updateStatus($id, $status, $name){
+        try {
+            $user = NonSponsorVisit::where('user_id', $id)->first();
+            $user->{$name.'_status'} = $status;
+            $user->save();
+
+            $documentName = str_replace('_', ' ', str_replace('doc', '', $name));
+            return redirect()->route('updateNonSponsorStatus', $id)->with('SuccessMessage', $documentName . ' has been ' . $status);
+        } catch (Exception $e) {
+            Log::emergency("File: " . $e->getFile() . " Line: " . $e->getLine() . " Message: " . $e->getMessage());
+            return redirect()->back()->with('ErrorMessage', 'Technical Error. Please contact our Customer Service.');
+        }
     }
 }

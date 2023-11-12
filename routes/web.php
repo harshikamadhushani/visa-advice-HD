@@ -108,6 +108,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/sponsor{id}', [SponsorVisitDocumnetController::class, 'checkSponsorDoc'])->name('checkSponsorDoc');
             Route::get('/updateSponsorStatus/{id}/{status}/{name}', [SponsorVisitDocumnetController::class, 'updateStatus'])->name('updateSponsorStatus');
 
+            Route::get('/nonSponsor{id}', [NonSponsorVisitController::class, 'checkNonSponsorDoc'])->name('checkNonSponsorDoc');
+            Route::get('/updateNonSponsorStatus/{id}/{status}/{name}', [NonSponsorVisitController::class, 'updateStatus'])->name('updateNonSponsorStatus');
+
         });
 
     });
