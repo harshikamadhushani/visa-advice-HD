@@ -5,7 +5,6 @@
 @endsection
 
 @section('content')
-    @foreach ($user as $data)
         <div class="container-fluid">
 
             <div class="page-header min-height-300 border-radius-xl mt-4"
@@ -123,6 +122,7 @@
                                         <td>
                                             <div class="d-flex px-3 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
+
                                                     <h6 class="mb-0 text-sm">Financial Document</h6>
                                                 </div>
                                             </div>
@@ -148,7 +148,7 @@
 
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
-                                                <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
+                                                <a href="{{ route('download.employment.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
                                                 {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
                                                     href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
                                             </div>
@@ -168,7 +168,7 @@
 
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
-                                                <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
+                                                <a href="{{ route('download.sponsor.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
                                                 {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
                                                     href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
                                             </div>
@@ -186,12 +186,11 @@
 
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
-                                                <a class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
+                                                <a href="{{ route('download.non.sponsor.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
                                                 {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
                                                     href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
                                             </div>
                                         </td>
-
 
                                     </tr>
 
@@ -203,5 +202,4 @@
                 </div>
             </div>
         </div>
-    @endforeach
 @endsection

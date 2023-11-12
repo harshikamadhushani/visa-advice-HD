@@ -20,6 +20,7 @@
 
           <div class="card-body px-0 pb-2">
             <div class="table-responsive">
+                @include('../layouts/alert')
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
@@ -74,8 +75,8 @@
 
                             <td class="align-middle">
                                 <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto">
-                                    <a class="btn btn-link badge badge-xm bg-gradient-success" href="{{ route('download.personal.documents', $user->id) }}">Download</a>
-                                    
+                                    <a class="btn btn-link badge badge-xm bg-gradient-success" href="{{ route('download.all.documents', $user->id) }}">Download</a>
+
                                 </div>
                             </td>
                         </tr>

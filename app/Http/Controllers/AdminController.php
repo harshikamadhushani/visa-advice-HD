@@ -23,8 +23,8 @@ class AdminController extends Controller
 
     public function getUser($id)
     {
-        $user=User::where('id', $id)->get();
-        return view('admin.user-profile', compact('user'));
+        $data=User::where('id', $id)->first();
+        return view('admin.user-profile', compact('data'));
     }
 
 
