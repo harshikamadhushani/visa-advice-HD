@@ -96,8 +96,11 @@ Route::middleware('auth')->group(function () {
             Route::get('/get-user{id}', [AdminController::class, 'getUser'])->name('getUser');
             Route::get('/get-admin-details', [AdminController::class, 'getAdminDetails'])->name('getAdminDetails');
 
-            Route::get('/personal{id}', [PersonalDocumentsController::class, 'checkDoc'])->name('checkDoc');
+            Route::get('/personal{id}', [PersonalDocumentsController::class, 'checkPersonalDoc'])->name('checkPersonalDoc');
             Route::Post('/updateStatus/{id}', [PersonalDocumentsController::class, 'updateStatus'])->name('updateStatus');
+
+            Route::get('/financial{id}', [FinancialDocumentsController::class, 'checkFinancialDoc'])->name('checkFinancialDoc');
+            Route::get('/updateFinancialStatus/{id}/{status}/{name}', [FinancialDocumentsController::class, 'updateStatus'])->name('updateFinancialStatus');
 
         });
 

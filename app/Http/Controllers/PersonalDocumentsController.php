@@ -22,13 +22,13 @@ class PersonalDocumentsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'current_or_previous_passport' => 'required|file|mimes:pdf,docx',
-            'currently_live' => 'required|file|mimes:pdf,docx',
-            'birth_certificate' => 'required|file|mimes:pdf,docx',
-            'marriage_certificate' => 'file|mimes:pdf,docx',
-            'birth_certificate_children' => 'file|mimes:pdf,docx',
-            'previous_visa_refusals' => 'file|mimes:pdf,docx',
-            'vaccination_proof' => 'file|mimes:pdf,docx',
+            'current_or_previous_passport' => 'required|file|mimes:pdf,jpeg,png,gif,jpg',
+            'currently_live' => 'required|file|mimes:pdf,jpeg,png,gif,jpg',
+            'birth_certificate' => 'required|file|mimes:pdf,jpeg,png,gif,jpg',
+            'marriage_certificate' => 'file|mimes:pdf,jpeg,png,gif,jpg',
+            'birth_certificate_children' => 'file|mimes:pdf,jpeg,png,gif,jpg',
+            'previous_visa_refusals' => 'file|mimes:pdf,jpeg,png,gif,jpg',
+            'vaccination_proof' => 'file|mimes:pdf,jpeg,png,gif,jpg',
         ]);
 
         try {
@@ -124,13 +124,13 @@ class PersonalDocumentsController extends Controller
     {
 
         $request->validate([
-            'current_or_previous_passport' => 'file|mimes:pdf,docx',
-            'currently_live' => 'file|mimes:pdf,docx',
-            'birth_certificate' => 'file|mimes:pdf,docx',
-            'marriage_certificate' => 'file|mimes:pdf,docx',
-            'birth_certificate_children' => 'file|mimes:pdf,docx',
-            'previous_visa_refusals' => 'file|mimes:pdf,docx',
-            'vaccination_proof' => 'file|mimes:pdf,docx',
+            'current_or_previous_passport' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'currently_live' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'birth_certificate' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'marriage_certificate' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'birth_certificate_children' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'previous_visa_refusals' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'vaccination_proof' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
         ]);
 
         try {
@@ -226,7 +226,7 @@ class PersonalDocumentsController extends Controller
     {
     }
 
-    public function checkDoc($id){
+    public function checkPersonalDoc($id){
         $user = PersonalDocument::where('user_id', $id)->get();
      return view('personal-documnets.admin-access',compact('user'));
     }
@@ -310,4 +310,5 @@ class PersonalDocumentsController extends Controller
             return redirect()->back()->with('ErrorMessage', 'Technical Error. Please contact our Customer Service.');
         }
     }
+
 }
