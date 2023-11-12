@@ -25,12 +25,12 @@ class SponsorVisitDocumnetController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'invitation_letter' => 'required|file|mimes:pdf,docx',
-            'residence_permit' => 'required|file|mimes:pdf,docx',
-            'evidence_of_available_accommodation' => 'required|file|mimes:pdf,docx',
-            'financial_statement_of_host' => 'required|file|mimes:pdf,docx',
-            'accountant_letter_and_tax_records' => 'required|file|mimes:pdf,docx',
-            'birth_or_marriage_certificate' => 'required|file|mimes:pdf,docx',
+            'invitation_letter' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'residence_permit' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'evidence_of_available_accommodation' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'financial_statement_of_host' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'accountant_letter_and_tax_records' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'birth_or_marriage_certificate' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
         ]);
 
         try {
@@ -113,12 +113,12 @@ class SponsorVisitDocumnetController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'invitation_letter' => 'file|mimes:pdf,docx',
-            'residence_permit' => 'file|mimes:pdf,docx',
-            'evidence_of_available_accommodation' => 'file|mimes:pdf,docx',
-            'financial_statement_of_host' => 'file|mimes:pdf,docx',
-            'accountant_letter_and_tax_records' => 'file|mimes:pdf,docx',
-            'birth_or_marriage_certificate' => 'file|mimes:pdf,docx',
+            'invitation_letter' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'residence_permit' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'evidence_of_available_accommodation' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'financial_statement_of_host' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'accountant_letter_and_tax_records' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'birth_or_marriage_certificate' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
         ]);
 
         try {
@@ -200,5 +200,26 @@ class SponsorVisitDocumnetController extends Controller
     public function destroy()
     {
 
+    }
+
+    public function checkSponsorDoc($id){
+
+        $data = SponsorVisit::where('user_id', $id)->first();
+        return view('sponsor-visit-documents.admin-access',compact('data'));
+    }
+
+    public function updateStatus($id, $status, $name){
+        try {
+            $user = SponsorVisit::where('user_id', $id)->first();
+            $user->{$name.'_status'} = $status;
+            $user->save();
+
+            $documentName = str_replace('_', ' ', str_replace('doc', '', $name));
+
+            return redirect()->route('checkSponsorDoc', $id)->with('SuccessMessage', $documentName . ' has been ' . $status);
+        } catch (Exception $e) {
+            Log::emergency("File: " . $e->getFile() . " Line: " . $e->getLine() . " Message: " . $e->getMessage());
+            return redirect()->back()->with('ErrorMessage', 'Technical Error. Please contact our Customer Service.');
+        }
     }
 }

@@ -168,8 +168,8 @@
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a href="{{ route('download.sponsor.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
+                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                href="{{ route('checkSponsorDoc',$data->id) }}"><i class="far fa-eye-alt me-2"></i>View</a>
                                             </div>
                                         </td>
                                     </tr>

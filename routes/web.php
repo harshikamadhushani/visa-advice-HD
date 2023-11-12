@@ -105,6 +105,9 @@ Route::middleware('auth')->group(function () {
             Route::get('/employment{id}', [EmploymentDocumnetsController::class, 'checkEmploymentDoc'])->name('checkEmploymentDoc');
             Route::get('/updateEmploymentStatus/{id}/{status}/{name}', [EmploymentDocumnetsController::class, 'updateStatus'])->name('updateEmployeeStatus');
 
+            Route::get('/sponsor{id}', [SponsorVisitDocumnetController::class, 'checkSponsorDoc'])->name('checkSponsorDoc');
+            Route::get('/updateSponsorStatus/{id}/{status}/{name}', [SponsorVisitDocumnetController::class, 'updateStatus'])->name('updateSponsorStatus');
+
         });
 
     });
