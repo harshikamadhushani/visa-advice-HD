@@ -25,10 +25,10 @@ class EmploymentDocumnetsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'employee' => 'required|file|mimes:pdf,docx',
-            'self_employed' => 'required|file|mimes:pdf,docx',
-            'retired' => 'required|file|mimes:pdf,docx',
-            'students' => 'required|file|mimes:pdf,docx',
+            'employee' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'self_employed' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'retired' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'students' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
         ]);
 
         try {
@@ -89,10 +89,10 @@ class EmploymentDocumnetsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'employee' => 'file|mimes:pdf,docx',
-            'self_employed' => 'file|mimes:pdf,docx',
-            'retired' => 'file|mimes:pdf,docx',
-            'students' => 'file|mimes:pdf,docx',
+            'employee' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'self_employed' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'retired' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'students' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
         ]);
 
         try {
@@ -153,5 +153,26 @@ class EmploymentDocumnetsController extends Controller
     public function destroy()
     {
 
+    }
+
+    public function checkEmploymentDoc($id){
+
+        $data = EmploymentDocument::where('user_id', $id)->first();
+        return view('employment-documents.admin-access',compact('data'));
+    }
+
+    public function updateStatus($id, $status, $name){
+        try {
+            $user = EmploymentDocument::where('user_id', $id)->first();
+            $user->{$name.'_status'} = $status;
+            $user->save();
+
+            $documentName = str_replace('_', ' ', str_replace('doc', '', $name));
+
+            return redirect()->route('checkEmploymentDoc', $id)->with('SuccessMessage', $documentName . ' has been ' . $status);
+        } catch (Exception $e) {
+            Log::emergency("File: " . $e->getFile() . " Line: " . $e->getLine() . " Message: " . $e->getMessage());
+            return redirect()->back()->with('ErrorMessage', 'Technical Error. Please contact our Customer Service.');
+        }
     }
 }

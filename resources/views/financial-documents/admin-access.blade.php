@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.admin-app')
+
 
 @section('title')
     Financial Documents
@@ -29,18 +30,6 @@
                     </div>
                     <div class="card-body px-0 pt-0 pb-2">
 
-                        @if (empty($financial_document))
-                            <form method="post" action="{{ route('financial.documents.store') }}"
-                                enctype="multipart/form-data">
-                                @csrf
-                            @else
-                                <form method="POST"
-                                    action="{{ route('financial.documents.update', $financial_document->id) }}"
-                                    enctype="multipart/form-data">
-                                    @csrf
-                                    @method('PUT')
-                        @endif
-
                         <div class="table-responsive p-0">
                             @include('../layouts/alert')
                             <table class="table align-items-center mb-0">
@@ -48,25 +37,17 @@
                                     <tr>
                                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
                                             Documents</th>
-                                        <th
-                                            class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
-                                            Upload</th>
-
-                                        @if (!empty($financial_document))
+                                            <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                                                Status</th>
                                             <th
-                                                class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                                                Status
-                                            </th>
-                                        @endif
+                                                class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">
+                                                Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <td>
                                             <div class="d-flex px-2 py-1">
-                                                <div>
-
-                                                </div>
                                                 <div class="d-flex flex-column justify-content-center">
                                                     <h6 class="mb-0 text-sm">Saving Accounts <span class="text-danger">*</span></h6>
                                                     <p class="text-xs text-secondary mb-0">Personal/family bank statements
@@ -75,28 +56,26 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @if (!empty($data->doc_saving_account))
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">
-                                            <div class="mb-3">
-                                                <input class="form-control" type="file" id="formFile"
-                                                    name="saving_account" @if (
-                                                        !empty($financial_document) &&
-                                                            ($financial_document->doc_saving_account_status == 'pending' ||
-                                                                $financial_document->doc_saving_account_status == 'verified')) disabled @endif>
+                                            <div class="text-uppercase d-flex px-2 py-1">
+                                                {{ $data->doc_saving_account_status }}
                                             </div>
-                                            </p>
                                         </td>
+                                        <td>
+                                            <div
+                                            class="mb-1 px-2 py-1 @if ($data->doc_saving_account_status == 'rejected') d-none @endif">
+                                                <a href="{{ URL::asset('/build/financial_documents/'.$data->doc_saving_account) }}" download><button type="button"
+                                                    class="btn bg-gradient-primary text-white">Download</button></a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'rejected', 'name' => 'doc_saving_account']) }}">
+                                                        <button type='submit' class="btn bg-gradient-danger text-white">Reject</button>
+                                                    </a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'verified', 'name' => 'doc_saving_account']) }}">
+                                                        <button type='submit' class="btn bg-gradient-success text-white">Accept</button>
+                                                    </a>
 
-                                        @if (!empty($financial_document))
-                                            <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm
-                                                    @if ($financial_document->doc_saving_account_status == 'verified') bg-gradient-success
-                                                    @elseif($financial_document->doc_saving_account_status == 'rejected') bg-gradient-danger
-                                                    @elseif($financial_document->doc_saving_account_status == 'pending') bg-gradient-warning
-                                                    @else bg-gradient-secondary @endif ">{{ $financial_document->doc_saving_account_status }}
-                                                </span>
-                                            </td>
+                                            </div>
+                                        </td>
                                         @endif
                                     </tr>
                                     <tr>
@@ -114,30 +93,26 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @if (!empty($data->doc_fixed_deposit_accounts))
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">
-                                            <div class="mb-3">
-                                                <input class="form-control" type="file" id="formFile"
-                                                    name="fixed_deposit_accounts"
-                                                    @if (
-                                                        !empty($financial_document) &&
-                                                            ($financial_document->doc_fixed_deposit_accounts_status == 'pending' ||
-                                                                $financial_document->doc_fixed_deposit_accounts_status == 'verified')) disabled @endif>
+                                            <div class="text-uppercase d-flex px-2 py-1">
+                                                {{ $data->doc_fixed_deposit_accounts_status }}
                                             </div>
-                                            </p>
-
                                         </td>
+                                        <td>
+                                            <div
+                                            class="mb-1 px-2 py-1 @if ($data->doc_fixed_deposit_accounts_status == 'rejected') d-none @endif">
+                                                <a href="{{ URL::asset('/build/financial_documents/'.$data->doc_fixed_deposit_accounts) }}" download><button type="button"
+                                                    class="btn bg-gradient-primary text-white">Download</button></a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'rejected', 'name' => 'doc_fixed_deposit_accounts']) }}">
+                                                        <button type='submit' class="btn bg-gradient-danger text-white">Reject</button>
+                                                    </a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'verified', 'name' => 'doc_fixed_deposit_accounts']) }}">
+                                                        <button type='submit' class="btn bg-gradient-success text-white">Accept</button>
+                                                    </a>
 
-                                        @if (!empty($financial_document))
-                                            <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm
-                                                @if ($financial_document->doc_fixed_deposit_accounts_status == 'verified') bg-gradient-success
-                                                @elseif($financial_document->doc_fixed_deposit_accounts_status == 'rejected') bg-gradient-danger
-                                                @elseif($financial_document->doc_fixed_deposit_accounts_status == 'pending') bg-gradient-warning
-                                                @else bg-gradient-secondary @endif">{{ $financial_document->doc_fixed_deposit_accounts_status }}
-                                                </span>
-                                            </td>
+                                            </div>
+                                        </td>
                                         @endif
                                     </tr>
                                     <tr>
@@ -154,30 +129,26 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @if (!empty($data->doc_current_accounts))
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">
-                                            <div class="mb-3">
-                                                <input class="form-control" type="file" id="formFile"
-                                                    name="current_accounts"
-                                                    @if (
-                                                        !empty($financial_document) &&
-                                                            ($financial_document->doc_current_accounts_status == 'pending' ||
-                                                                $financial_document->doc_current_accounts_status == 'verified')) disabled @endif>
+                                            <div class="text-uppercase d-flex px-2 py-1">
+                                                {{ $data->doc_current_accounts_status }}
                                             </div>
-                                            </p>
-
                                         </td>
+                                        <td>
+                                            <div
+                                            class="mb-1 px-2 py-1 @if ($data->doc_current_accounts_status == 'rejected') d-none @endif">
+                                                <a href="{{ URL::asset('/build/financial_documents/'.$data->doc_current_accounts) }}" download><button type="button"
+                                                    class="btn bg-gradient-primary text-white">Download</button></a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'rejected', 'name' => 'doc_current_accounts']) }}">
+                                                        <button type='submit' class="btn bg-gradient-danger text-white">Reject</button>
+                                                    </a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'verified', 'name' => 'doc_current_accounts']) }}">
+                                                        <button type='submit' class="btn bg-gradient-success text-white">Accept</button>
+                                                    </a>
 
-                                        @if (!empty($financial_document))
-                                            <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm
-                                                @if ($financial_document->doc_current_accounts_status == 'verified') bg-gradient-success
-                                                @elseif($financial_document->doc_current_accounts_status == 'rejected') bg-gradient-danger
-                                                @elseif($financial_document->doc_current_accounts_status == 'pending') bg-gradient-warning
-                                                @else bg-gradient-secondary @endif">{{ $financial_document->doc_current_accounts_status }}
-                                                </span>
-                                            </td>
+                                            </div>
+                                        </td>
                                         @endif
                                     </tr>
                                     <tr>
@@ -193,30 +164,27 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @if (!empty($data->doc_money_of_credit_cards))
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">
-                                            <div class="mb-3">
-                                                <input class="form-control" type="file" id="formFile"
-                                                    name="money_of_credit_cards"
-                                                    @if (
-                                                        !empty($financial_document) &&
-                                                            ($financial_document->doc_money_of_credit_cards_status == 'pending' ||
-                                                                $financial_document->doc_money_of_credit_cards_status == 'verified')) disabled @endif>
+                                            <div class="text-uppercase d-flex px-2 py-1">
+                                                {{ $data->doc_money_of_credit_cards_status }}
                                             </div>
-                                            </p>
                                         </td>
-                                        @if (!empty($financial_document))
-                                            <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm
-                                                @if ($financial_document->doc_money_of_credit_cards_status == 'verified') bg-gradient-success
-                                                @elseif($financial_document->doc_money_of_credit_cards_status == 'rejected') bg-gradient-danger
-                                                @elseif($financial_document->doc_money_of_credit_cards_status == 'pending') bg-gradient-warning
-                                                @else bg-gradient-secondary @endif">
-                                                    {{ $financial_document->doc_money_of_credit_cards_status }}
-                                                </span>
+                                        <td>
+                                            <div
+                                            class="mb-1 px-2 py-1 @if ($data->doc_money_of_credit_cards_status == 'rejected') d-none @endif">
+                                                <a href="{{ URL::asset('/build/financial_documents/'.$data->doc_money_of_credit_cards) }}" download><button type="button"
+                                                    class="btn bg-gradient-primary text-white">Download</button></a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'rejected', 'name' => 'doc_money_of_credit_cards']) }}">
+                                                        <button type='submit' class="btn bg-gradient-danger text-white">Reject</button>
+                                                    </a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'verified', 'name' => 'doc_money_of_credit_cards']) }}">
+                                                        <button type='submit' class="btn bg-gradient-success text-white">Accept</button>
+                                                    </a>
+
+                                            </div>
+                                        </td>
                                         @endif
-                                        </td>
                                     </tr>
                                     <tr>
                                         <td>
@@ -231,27 +199,26 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @if (!empty($data->doc_insurance))
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">
-                                            <div class="mb-3">
-                                                <input class="form-control" type="file" id="formFile" name="insurance"
-                                                    @if (
-                                                        !empty($financial_document) &&
-                                                            ($financial_document->doc_insurance_status == 'pending' ||
-                                                                $financial_document->doc_insurance_status == 'verified')) disabled @endif>
+                                            <div class="text-uppercase d-flex px-2 py-1">
+                                                {{ $data->doc_insurance_status }}
                                             </div>
-                                            </p>
                                         </td>
-                                        @if (!empty($financial_document))
-                                            <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm
-                                                @if ($financial_document->doc_insurance_status == 'verified') bg-gradient-success
-                                                @elseif($financial_document->doc_insurance_status == 'rejected') bg-gradient-danger
-                                                @elseif($financial_document->doc_insurance_status == 'pending') bg-gradient-warning
-                                                @else bg-gradient-secondary @endif">{{ $financial_document->doc_insurance_status }}
-                                                </span>
-                                            </td>
+                                        <td>
+                                            <div
+                                            class="mb-1 px-2 py-1 @if ($data->doc_insurance_status == 'rejected') d-none @endif">
+                                                <a href="{{ URL::asset('/build/financial_documents/'.$data->doc_insurance) }}" download><button type="button"
+                                                    class="btn bg-gradient-primary text-white">Download</button></a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'rejected', 'name' => 'doc_insurance']) }}">
+                                                        <button type='submit' class="btn bg-gradient-danger text-white">Reject</button>
+                                                    </a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'verified', 'name' => 'doc_insurance']) }}">
+                                                        <button type='submit' class="btn bg-gradient-success text-white">Accept</button>
+                                                    </a>
+
+                                            </div>
+                                        </td>
                                         @endif
                                     </tr>
                                     <tr>
@@ -268,40 +235,32 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        @if (!empty($data->doc_evidence_of_assets))
                                         <td>
-                                            <p class="text-xs font-weight-bold mb-0">
-                                            <div class="mb-3">
-                                                <input class="form-control" type="file" id="formFile"
-                                                    name="evidence_of_assets"
-                                                    @if (
-                                                        !empty($financial_document) &&
-                                                            ($financial_document->doc_evidence_of_assets_status == 'pending' ||
-                                                                $financial_document->doc_evidence_of_assets_status == 'verified')) disabled @endif>
+                                            <div class="text-uppercase d-flex px-2 py-1">
+                                                {{ $data->doc_evidence_of_assets_status }}
                                             </div>
-                                            </p>
                                         </td>
+                                        <td>
+                                            <div
+                                            class="mb-1 px-2 py-1 @if ($data->doc_evidence_of_assets_status == 'rejected') d-none @endif">
+                                                <a href="{{ URL::asset('/build/financial_documents/'.$data->doc_evidence_of_assets) }}" download><button type="button"
+                                                    class="btn bg-gradient-primary text-white">Download</button></a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'rejected', 'name' => 'doc_evidence_of_assets']) }}">
+                                                        <button type='submit' class="btn bg-gradient-danger text-white">Reject</button>
+                                                    </a>
+                                                    <a href="{{ route('updateFinancialStatus', ['id' => $data->user_id, 'status' => 'verified', 'name' => 'doc_evidence_of_assets']) }}">
+                                                        <button type='submit' class="btn bg-gradient-success text-white">Accept</button>
+                                                    </a>
 
-                                        @if (!empty($financial_document))
-                                            <td class="align-middle text-center text-sm">
-                                                <span
-                                                    class="badge badge-sm
-                                                @if ($financial_document->doc_evidence_of_assets_status == 'verified') bg-gradient-success
-                                                @elseif($financial_document->doc_evidence_of_assets_status == 'rejected') bg-gradient-danger
-                                                @elseif($financial_document->doc_evidence_of_assets_status == 'pending') bg-gradient-warning
-                                                @else bg-gradient-secondary @endif">
-                                                    {{ $financial_document->doc_evidence_of_assets_status }}
-                                                </span>
-                                            </td>
+                                            </div>
+                                        </td>
                                         @endif
                                     </tr>
                                 </tbody>
+
                             </table>
                         </div>
-                        <div class="cus-submit-btn">
-                            <button class="btn btn-outline-primary btn-sm mb-0 me-3">Upload</button>
-                        </div>
-
-                        </form>
                     </div>
                 </div>
             </div>

@@ -63,7 +63,8 @@
                                                         </div>
                                                     </td>
                                                     <td>
-                                                        <div class="mb-1 px-2 py-1">
+                                                        <div
+                                                        class="mb-1 px-2 py-1 @if ($data->doc_currently_live_status == 'rejected') d-none @endif">
                                                             <a href="{{ URL::asset('/build/personal_documents/'.$data->doc_current_or_previous_passport) }}" download><button type="button"
                                                                 class="btn bg-gradient-primary text-white">Download</button></a>
                                                             <button type='submit'

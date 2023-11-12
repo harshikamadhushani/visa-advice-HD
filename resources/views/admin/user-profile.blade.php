@@ -113,7 +113,7 @@
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a href="{{ route('download.personal.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
                                                 <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="{{ route('checkDoc',$data->id) }}"><i class="far fa-eye-alt me-2"></i>View</a>
+                                                    href="{{ route('checkPersonalDoc',$data->id) }}"><i class="far fa-eye-alt me-2"></i>View</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -122,7 +122,6 @@
                                         <td>
                                             <div class="d-flex px-3 py-1">
                                                 <div class="d-flex flex-column justify-content-center">
-
                                                     <h6 class="mb-0 text-sm">Financial Document</h6>
                                                 </div>
                                             </div>
@@ -131,8 +130,8 @@
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a href="{{ route('download.financial.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
+                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                    href="{{ route('checkFinancialDoc',$data->id) }}"><i class="far fa-eye-alt me-2"></i>View</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -149,8 +148,8 @@
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a href="{{ route('download.employment.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
+                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                    href="{{ route('checkEmploymentDoc',$data->id) }}"><i class="far fa-eye-alt me-2"></i>View</a>
                                             </div>
                                         </td>
 
@@ -169,8 +168,8 @@
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a href="{{ route('download.sponsor.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
+                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                href="{{ route('checkSponsorDoc',$data->id) }}"><i class="far fa-eye-alt me-2"></i>View</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -187,8 +186,8 @@
                                         <td class="align-middle">
                                             <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto ">
                                                 <a href="{{ route('download.non.sponsor.documents', $data->id) }}" class="btn btn-link badge badge-xm bg-gradient-primary">Download</a>
-                                                {{-- <a class="btn btn-link text-danger text-gradient px-3 mb-0"
-                                                    href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a> --}}
+                                                <a class="btn btn-link text-danger text-gradient px-3 mb-0"
+                                                href="{{ route('checkNonSponsorDoc',$data->id) }}"><i class="far fa-eye-alt me-2"></i>View</a>
                                             </div>
                                         </td>
 

@@ -96,8 +96,20 @@ Route::middleware('auth')->group(function () {
             Route::get('/get-user{id}', [AdminController::class, 'getUser'])->name('getUser');
             Route::get('/get-admin-details', [AdminController::class, 'getAdminDetails'])->name('getAdminDetails');
 
-            Route::get('/personal{id}', [PersonalDocumentsController::class, 'checkDoc'])->name('checkDoc');
+            Route::get('/personal{id}', [PersonalDocumentsController::class, 'checkPersonalDoc'])->name('checkPersonalDoc');
             Route::Post('/updateStatus/{id}', [PersonalDocumentsController::class, 'updateStatus'])->name('updateStatus');
+
+            Route::get('/financial{id}', [FinancialDocumentsController::class, 'checkFinancialDoc'])->name('checkFinancialDoc');
+            Route::get('/updateFinancialStatus/{id}/{status}/{name}', [FinancialDocumentsController::class, 'updateStatus'])->name('updateFinancialStatus');
+
+            Route::get('/employment{id}', [EmploymentDocumnetsController::class, 'checkEmploymentDoc'])->name('checkEmploymentDoc');
+            Route::get('/updateEmploymentStatus/{id}/{status}/{name}', [EmploymentDocumnetsController::class, 'updateStatus'])->name('updateEmployeeStatus');
+
+            Route::get('/sponsor{id}', [SponsorVisitDocumnetController::class, 'checkSponsorDoc'])->name('checkSponsorDoc');
+            Route::get('/updateSponsorStatus/{id}/{status}/{name}', [SponsorVisitDocumnetController::class, 'updateStatus'])->name('updateSponsorStatus');
+
+            Route::get('/nonSponsor{id}', [NonSponsorVisitController::class, 'checkNonSponsorDoc'])->name('checkNonSponsorDoc');
+            Route::get('/updateNonSponsorStatus/{id}/{status}/{name}', [NonSponsorVisitController::class, 'updateStatus'])->name('updateNonSponsorStatus');
 
         });
 

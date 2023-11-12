@@ -25,13 +25,15 @@ class FinancialDocumentsController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'saving_account' => 'required|file|mimes:pdf,docx',
-            'fixed_deposit_accounts' => 'required|file|mimes:pdf,docx',
-            'current_accounts' => 'required|file|mimes:pdf,docx',
-            'money_of_credit_cards' => 'required|file|mimes:pdf,docx',
-            'insurance' => 'required|file|mimes:pdf,docx',
-            'evidence_of_assets' => 'required|file|mimes:pdf,docx',
+            'saving_account' => 'required|file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'fixed_deposit_accounts' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'current_accounts' => 'required|file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'money_of_credit_cards' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'insurance' => 'file|mimes:pdf,docx,jpeg,png,gif,jpg',
+            'evidence_of_assets' => 'required|file|mimes:pdf,docx,jpeg,png,gif,jpg',
         ]);
+
+
 
         try {
             $financial_document = new FinancialDocument();
@@ -116,13 +118,14 @@ class FinancialDocumentsController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'saving_account' => 'file|mimes:pdf,docx',
-            'fixed_deposit_accounts' => 'file|mimes:pdf,docx',
-            'current_accounts' => 'file|mimes:pdf,docx',
-            'money_of_credit_cards' => 'file|mimes:pdf,docx',
-            'insurance' => 'file|mimes:pdf,docx',
-            'evidence_of_assets' => 'file|mimes:pdf,docx',
+            'saving_account' => 'file|mimes:pdf,docx,jpeg,png,gif',
+            'fixed_deposit_accounts' => 'file|mimes:pdf,docx,jpeg,png,gif',
+            'current_accounts' => 'file|mimes:pdf,docx,jpeg,png,gif',
+            'money_of_credit_cards' => 'file|mimes:pdf,docx,jpeg,png,gif',
+            'insurance' => 'file|mimes:pdf,docx,jpeg,png,gif',
+            'evidence_of_assets' => 'file|mimes:pdf,docx,jpeg,png,gif',
         ]);
+
 
         try {
             $financial_document = FinancialDocument::where('user_id', Auth::user()->id)->first();
@@ -208,4 +211,25 @@ class FinancialDocumentsController extends Controller
     {
 
     }
+    public function checkFinancialDoc($id){
+        $data = FinancialDocument::where('user_id', $id)->first();
+        return view('financial-documents.admin-access',compact('data'));
+    }
+
+    public function updateStatus($id, $status, $name){
+        try {
+            $user = FinancialDocument::where('user_id', $id)->first();
+            $user->{$name.'_status'} = $status;
+            $user->save();
+
+            $documentName = str_replace('_', ' ', str_replace('doc', '', $name));
+
+
+            return redirect()->route('checkFinancialDoc', $id)->with('SuccessMessage', $documentName . ' has been ' . $status);
+        } catch (Exception $e) {
+            Log::emergency("File: " . $e->getFile() . " Line: " . $e->getLine() . " Message: " . $e->getMessage());
+            return redirect()->back()->with('ErrorMessage', 'Technical Error. Please contact our Customer Service.');
+        }
+    }
+
 }
