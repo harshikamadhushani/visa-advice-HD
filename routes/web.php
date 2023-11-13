@@ -115,6 +115,10 @@ Route::middleware('auth')->group(function () {
 
         });
 
+        Route::prefix('/profile')->group(function () {
+            Route::put('/update{id}', [AdminController::class, 'update'])->name('admin.profile.update');
+            Route::post('/remove-profile-pic', [AdminController::class, 'removeProfilePic'])->name('removeProfilePic');
+        });
     });
 
 
