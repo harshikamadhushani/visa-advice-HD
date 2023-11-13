@@ -145,14 +145,18 @@
                                                 <input type="password" name="password" class="form-control"
                                                     placeholder="Password" aria-label="Password"
                                                     aria-describedby="password-addon" required>
-                                                <input-error :messages="$errors - > get('password')" class="mt-2" />
+                                                    @error('password')
+                                                    <div class="mt-2" style="color: red;">{{ $message }}</div>
+                                                @enderror
                                             </div>
                                             <div class="mb-3">
                                                 <input type="password" name="password_confirmation" class="form-control"
                                                     placeholder="Confirm Password" aria-label="Confirm Password"
                                                     aria-describedby="password-addon" required>
-                                                <input-error :messages="$errors - > get('password_confirmation')"
-                                                    class="mt-2" />
+                                                    @error('password_confirmation')
+                                                    <div class="mt-2" style="color: red;">{{ $message }}</div>
+                                                @enderror
+
                                             </div>
                                             <div class="form-check form-check-info text-left">
                                                 <input class="form-check-input" type="checkbox" value=""
