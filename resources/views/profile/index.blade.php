@@ -155,10 +155,28 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
+
+                                        <div class="row">
+                                            @if ($profile->profile_pic)
+                                            <div class="avatar avatar-xl position-relative">
+                                                <img id="profileImage" src="{{ URL::asset('/build/assets/img/profile_pic/' . $profile->profile_pic) }}"
+                                                    alt="profile_image" class="w-100 border-radius-lg shadow-sm" style="margin-left: 15px;">
+                                                <a href="#" id="removeProfilePic">
+                                                    <i class="fas fa-trash-alt text-secondary text-sm" title="Remove Profile Pic" style="margin-left: 10px;"></i>
+                                                </a>
+                                            </div>
+                                            @else
+                                            <div class="avatar avatar-xl position-relative">
+                                                <img src="{{ URL::asset('/build/assets/img/person-icon.png') }}"
+                                                    alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                                            </div>
+                                            @endif
+                                        </div>
+
                                         <div class="form-group">
                                             <label for="profile_pic">Profile Picture</label>
-                                            <input type="file" class="form-control-file" id="profile_pic"
-                                                name="profile_pic">
+                                            <input type="file" class="form-control-file" id="profile_pic" name="profile_pic">
+
                                         </div>
 
                                         <div class="form-group">
@@ -242,3 +260,25 @@
         </div>
     </div>
 @endsection
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#removeProfilePic').on('click', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ route("removeProfilePic") }}',
+                method: 'POST',
+                data: { _token: '{{ csrf_token() }}' },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
