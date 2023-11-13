@@ -109,7 +109,7 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Applicants</p>
                     </div>
-                    <h4 class="font-weight-bolder">36K</h4>
+                    <h4 class="font-weight-bolder">{{ $count_users }}</h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-60" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -135,7 +135,7 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Verified </p>
                     </div>
-                    <h4 class="font-weight-bolder">2m</h4>
+                    <h4 class="font-weight-bolder">{{ $verified_count }}</h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-90" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -159,7 +159,7 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Pending </p>
                     </div>
-                    <h4 class="font-weight-bolder">435$</h4>
+                    <h4 class="font-weight-bolder">{{ $pending_count }}</h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-30" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
@@ -184,7 +184,7 @@
                       </div>
                       <p class="text-xs mt-1 mb-0 font-weight-bold">Declined </p>
                     </div>
-                    <h4 class="font-weight-bolder">43</h4>
+                    <h4 class="font-weight-bolder">{{ $declined_count }}</h4>
                     <div class="progress w-75">
                       <div class="progress-bar bg-dark w-50" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>

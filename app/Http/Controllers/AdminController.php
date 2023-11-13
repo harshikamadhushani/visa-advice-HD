@@ -26,7 +26,9 @@ class AdminController extends Controller
 
         $declined_count = $this->getApplicationCount('rejected');
 
-        return view('admin.dashboard',compact('users', 'count_users', 'verified_count', 'declined_count'));
+        $pending_count = $this->getApplicationCount('pending');
+
+        return view('admin.dashboard',compact('users', 'count_users', 'verified_count', 'declined_count', 'pending_count'));
     }
 
     public function getApplicationCount($status)
