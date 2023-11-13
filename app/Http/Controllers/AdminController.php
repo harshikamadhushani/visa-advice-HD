@@ -11,6 +11,8 @@ use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -150,7 +152,11 @@ class AdminController extends Controller
 
     public function getUser($id)
     {
-        $data=User::where('id', $id)->first();
+        $data = User::where('users.id', $id)
+            ->leftJoin('country', 'users.id', '=', 'country.user_id')
+            ->select('users.*', 'country.country_name', 'country.purpose')
+            ->first();
+
         return view('admin.user-profile', compact('data'));
     }
 
@@ -214,5 +220,35 @@ class AdminController extends Controller
         } catch (\Exception $e) {
             return view ('admin.admin-profile');
         }
+    }
+    public function userSetting(){
+        $profile = User::where('id', auth()->user()->id)->first();
+        return view('admin.admin-setting',compact('profile'));
+    }
+
+
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => ['required', function ($attribute, $value, $fail) {
+                if (!Hash::check($value, auth()->user()->password)) {
+                    $fail('The old password is incorrect.');
+                }
+            }],
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Update the password
+        auth()->user()->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return redirect()->back()->with('success', 'Password has been reset successfully.');
     }
 }
