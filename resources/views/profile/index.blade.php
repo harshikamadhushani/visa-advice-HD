@@ -97,41 +97,41 @@
         </div>
     </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">New message to @CT</h5>
-                  <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                  <form>
-                    <div class="form-group">
-                      <label for="recipient-name" class="col-form-label">Recipient:</label>
-                      <input type="text" class="form-control" value="Creative Tim" id="recipient-name">
+            <!-- Modal -->
+            <form id="emailForm" action="mailto:{{ $admin->email }}" method="post" enctype="text/plain">
+                <div class="modal fade" id="exampleModalMessage" tabindex="-1" role="dialog" aria-labelledby="exampleModalMessageTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">New message to @CT</h5>
+                                <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Subject:</label>
+                                    <input type="text" class="form-control" id="recipient-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label">Message:</label>
+                                    <textarea class="form-control" id="message-text"></textarea>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn bg-gradient-primary" onclick="sendEmail()">Send message</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                      <label for="message-text" class="col-form-label">Message:</label>
-                      <textarea class="form-control" id="message-text"></textarea>
-                    </div>
-                  </form>
                 </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn bg-gradient-primary" id="sendMessageButton">Send message</button>
+            </form>
 
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
 
 
     <div class="container-fluid py-4">
-        <div class="card h-100">
+        <div class="card">
             <div class="card-header pb-0 p-3">
                 <div class="row">
                     <div class="col-md-8 d-flex align-items-center">
@@ -261,8 +261,6 @@
                     </li>
                 </ul>
             </div>
-
-
         </div>
     </div>
 @endsection
@@ -295,5 +293,12 @@
         var myModal = new bootstrap.Modal(document.getElementById('exampleModalMessage'));
         myModal.show();
     });
+    function sendEmail() {
+        var subject = $('#recipient-name').val();
+        var message = $('#message-text').val();
+        var emailLink = "mailto:{{ $admin->email }}?subject=" + encodeURIComponent(subject) + '&body=' + encodeURIComponent(message);
+        window.location.href = emailLink;
+    }
 </script>
+
 

@@ -15,7 +15,8 @@ class UserProfileController extends Controller
     {
 
         $profile = User::where('id', auth()->user()->id)->first();
-        return view("profile.index", compact('profile'));
+        $admin = User::where('role_id', 1)->first();
+        return view("profile.index", compact('profile','admin'));
     }
 
     public function update(Request $request)
