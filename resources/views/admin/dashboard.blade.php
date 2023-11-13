@@ -228,15 +228,16 @@
 
             <div class="card-body px-0 pb-2">
                 <div class="table-responsive">
+                    @include('../layouts/alert')
                   <table class="table align-items-center mb-0">
                     <thead>
                       <tr>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profile</th>
                         <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">User Name</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Mobile No</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Passport Number</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Email</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-6 ">Actions</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Country</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Passport Number</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Email</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Actions</th>
                       </tr>
                     </thead>
 
@@ -268,22 +269,32 @@
                                     </div>
                                 </td>
 
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold">{{ $user->mobile_no }}</span>
+                                <td>
+                                    <div class="d-flex py-2 px-3">
+                                        <div class="d-flex flex-column justify-content-center">
+                                           <span class="text-xs font-weight-bold">{{ $user->country_name }}</span>
+                                        </div>
+                                    </div>
                                 </td>
 
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold">{{ $user->passport_no }}</span>
+                                <td>
+                                    <div class="d-flex py-2 px-3">
+                                        <div class="d-flex flex-column justify-content-center">
+                                          <span class="text-xs font-weight-bold">{{ $user->passport_no }}</span>
+                                        </div>
+                                    </div>
                                 </td>
 
-                                <td class="align-middle text-center text-sm">
-                                    <span class="text-xs font-weight-bold">{{ $user->email }}</span>
+                                <td>
+                                    <div class="d-flex py-2 px-3">
+                                       <span class="text-xs font-weight-bold">{{ $user->email }}</span>
+                                    </div>
                                 </td>
 
-                                <td class="align-middle">
+                                <td>
                                     <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto">
-                                        <a class="btn btn-link badge badge-xm bg-gradient-success" href="profile.html">Download</a>
-                                        <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                                        <a class="btn btn-link badge badge-xm bg-gradient-success" href="{{ route('download.all.documents', $user->id) }}">Download</a>
+
                                     </div>
                                 </td>
                             </tr>
@@ -295,8 +306,6 @@
                   </table>
                 </div>
               </div>
-            <a class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 " style="padding: 10px; text-decoration: underline; cursor: pointer; margin-left: 1000px;" href="personaldc.html">View More</a>
-          </div>
 
         </div>
 

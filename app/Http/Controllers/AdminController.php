@@ -16,6 +16,8 @@ class AdminController extends Controller
 {
     public function index(){
         $users = User::where('role_id', 2)
+        ->leftJoin('country', 'users.id', '=', 'country.user_id')
+        ->select('users.*', 'country.country_name', 'country.purpose')
         ->orderBy('id', 'desc')->get();
 
         $count_users = User::role('user')->count();

@@ -31,10 +31,7 @@
         @yield('content')
 
     </main>
-
-
-    @include('layouts.plugins')
-
+    
     @include('layouts.vendor-scripts')
 
 

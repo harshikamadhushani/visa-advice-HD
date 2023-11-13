@@ -65,7 +65,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="modal" data-bs-target="#exampleModalMessage" aria-selected="false" id="messagesLink">
+                                <a class="nav-link mb-0 px-0 py-1" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModalMessage" aria-selected="false" id="messagesLink">
                                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  data-bs-target="#exampleModalMessage">
                                         <title>document</title>
@@ -103,7 +103,7 @@
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">New message to @CT</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">New message to {{ $admin->name }}</h5>
                                 <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
@@ -126,7 +126,6 @@
                     </div>
                 </div>
             </form>
-
 
 
 
