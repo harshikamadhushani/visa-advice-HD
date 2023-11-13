@@ -378,7 +378,7 @@
                                     </div>
 
                                   <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Purpose of Journey</label>
+                                    <label for="exampleFormControlTextarea1">Purpose of Journey and Expecting Visa Type</label>
                                     <textarea name='purpose' class="form-control" id="exampleFormControlTextarea1" rows="3"
                                       placeholder="For my higher studies"></textarea>
                                   </div>
