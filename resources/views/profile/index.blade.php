@@ -65,7 +65,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link mb-0 px-0 py-1" data-bs-toggle="modal" data-bs-target="#exampleModalMessage" aria-selected="false" id="messagesLink">
+                                <a class="nav-link mb-0 px-0 py-1" href="javascript:;" data-bs-toggle="modal" data-bs-target="#exampleModalMessage" aria-selected="false" id="messagesLink">
                                     <svg class="text-dark" width="16px" height="16px" viewBox="0 0 40 44" version="1.1"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  data-bs-target="#exampleModalMessage">
                                         <title>document</title>
@@ -126,7 +126,6 @@
                     </div>
                 </div>
             </form>
-
 
 
 
