@@ -17,7 +17,10 @@ class AdminController extends Controller
     public function allUsers()
     {
         $users = User::where('role_id', 2)
-            ->get();
+        ->leftJoin('country', 'users.id', '=', 'country.user_id')
+        ->select('users.*', 'country.country_name', 'country.purpose')
+        ->get();
+
         return view('admin.getUsers', compact('users'));
     }
 
