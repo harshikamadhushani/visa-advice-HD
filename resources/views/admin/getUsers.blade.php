@@ -26,10 +26,10 @@
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Profile</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">User Name</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Mobile No</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Passport Number</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Email</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-6 ">Actions</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Country</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Passport Number</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Email</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ">Actions</th>
                   </tr>
                 </thead>
 
@@ -61,19 +61,29 @@
                                 </div>
                             </td>
 
-                            <td class="align-middle text-center text-sm">
-                                <span class="text-xs font-weight-bold">{{ $user->mobile_no }}</span>
+                            <td>
+                                <div class="d-flex py-2 px-3">
+                                    <div class="d-flex flex-column justify-content-center">
+                                       <span class="text-xs font-weight-bold">{{ $user->country_name }}</span>
+                                    </div>
+                                </div>
                             </td>
 
-                            <td class="align-middle text-center text-sm">
-                                <span class="text-xs font-weight-bold">{{ $user->passport_no }}</span>
+                            <td>
+                                <div class="d-flex py-2 px-3">
+                                    <div class="d-flex flex-column justify-content-center">
+                                      <span class="text-xs font-weight-bold">{{ $user->passport_no }}</span>
+                                    </div>
+                                </div>
                             </td>
 
-                            <td class="align-middle text-center text-sm">
-                                <span class="text-xs font-weight-bold">{{ $user->email }}</span>
+                            <td>
+                                <div class="d-flex py-2 px-3">
+                                   <span class="text-xs font-weight-bold">{{ $user->email }}</span>
+                                </div>
                             </td>
 
-                            <td class="align-middle">
+                            <td>
                                 <div class="action text-xs font-weight-bold progress-wrapper w-75 mx-auto">
                                     <a class="btn btn-link badge badge-xm bg-gradient-success" href="{{ route('download.all.documents', $user->id) }}">Download</a>
 

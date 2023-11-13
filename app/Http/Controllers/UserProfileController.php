@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Country;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use ZipArchive;
 
 class UserProfileController extends Controller
@@ -26,11 +29,18 @@ class UserProfileController extends Controller
             'postal_address' => 'nullable|string|max:255',
         ]);
 
-        if ($request->hasFile('profile_pic')) {
-            $file = $request->file('profile_pic');
-            $fileName = time() . '.' . uniqid() . '.' . $file->extension();
-            $file->move(public_path('build/assets/img/profile_pic/'), $fileName);
+     if ($request->has('remove_profile_pic')) {
+
+        if (auth()->user()->profile_pic) {
+            unlink(public_path('build/assets/img/profile_pic/') . auth()->user()->profile_pic);
         }
+        auth()->user()->update(['profile_pic' => null]);
+    } elseif ($request->hasFile('profile_pic')) {
+        $file = $request->file('profile_pic');
+        $fileName = time() . '.' . uniqid() . '.' . $file->extension();
+        $file->move(public_path('build/assets/img/profile_pic/'), $fileName);
+        auth()->user()->update(['profile_pic' => $fileName]);
+    }
 
         auth()->user()->update([
             'about' => $request->input('about'),
@@ -39,7 +49,6 @@ class UserProfileController extends Controller
             'passport_no' => $request->input('passport_no'),
             'postal_address' => $request->input('postal_address'),
             'mobile_no' => $request->input('mobile_no'),
-            'profile_pic' => $fileName,
         ]);
 
         return redirect()->route('user.profile')->with('success', 'Profile updated successfully!');
@@ -79,10 +88,44 @@ class UserProfileController extends Controller
             }
 
             $zip->close();
-            
+
             return response()->download($zipFilePath, $zipFileName)->deleteFileAfterSend(true);
         } else {
             return back()->with('ErrorMessage', 'Failed to create the zip file.');
         }
     }
+
+    public function removeProfilePic(Request $request)
+    {
+        try {
+            // Remove the current profile picture
+            if (auth()->user()->profile_pic) {
+                unlink(public_path('build/assets/img/profile_pic/') . auth()->user()->profile_pic);
+            }
+
+            // Set profile_pic column in the database to null
+            auth()->user()->update(['profile_pic' => null]);
+
+            return redirect()->route('user.profile')->with('success', 'Profile picture removed successfully');
+        } catch (\Exception $e) {
+            return redirect()->route('user.profile')->with('error', 'Failed to remove profile picture. Please try again.');
+        }
+    }
+
+    public function saveCountry($id,Request $request){
+
+       try {
+        $country = Country::updateOrCreate(
+            ['user_id' => $id],
+            ['country_name' => $request->input('country'), 'purpose' => $request->input('purpose')]
+        );
+
+            return redirect()->route('user.dashboard')->with('SuccessMessage', 'Documents have been submitted.');
+        } catch (Exception $e) {
+            Log::emergency("File: " . $e->getFile() . " Line: " . $e->getLine() . " Message: " . $e->getMessage());
+            return redirect()->back()->with('ErrorMessage', 'Technical Error. Please contact our Customer Service.');
+        }
+   }
+
+
 }

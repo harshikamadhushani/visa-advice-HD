@@ -9,6 +9,7 @@ use App\Http\Controllers\NonSponsorVisitController;
 use App\Http\Controllers\PersonalDocumentsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SponsorVisitDocumnetController;
+use App\Http\Controllers\UserDashboard;
 use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,9 +37,7 @@ Route::middleware('auth')->group(function () {
     // User Routes
     Route::middleware('role:user')->prefix('/user')->group(function () {
 
-        Route::get('/dashboard', function () {
-            return view('dashboard');
-        })->name('user.dashboard');
+        Route::get('/dashboard', [UserDashboard::class,'index'])->name('user.dashboard');
 
         Route::prefix('/personal-documents')->group(function () {
             Route::get('/', [PersonalDocumentsController::class, 'index'])->name('personal.documents.index');
@@ -73,6 +72,9 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/profile')->group(function () {
             Route::get('/', [UserProfileController::class, 'index'])->name('user.profile');
             Route::put('/update{id}', [UserProfileController::class, 'update'])->name('user.profile.update');
+            Route::post('/remove-profile-pic', [UserProfileController::class, 'removeProfilePic'])->name('removeProfilePic');
+            Route::post('/save-country{id}', [UserProfileController::class, 'saveCountry'])->name('saveCountry');
+
 
         });
     });
@@ -113,6 +115,10 @@ Route::middleware('auth')->group(function () {
 
         });
 
+        Route::prefix('/profile')->group(function () {
+            Route::put('/update{id}', [AdminController::class, 'update'])->name('admin.profile.update');
+            Route::post('/remove-profile-pic', [AdminController::class, 'removeProfilePic'])->name('removeProfilePic');
+        });
     });
 
 

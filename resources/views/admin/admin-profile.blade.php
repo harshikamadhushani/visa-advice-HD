@@ -48,9 +48,96 @@
                         <div class="col-md-8 d-flex align-items-center">
                             <h6 class="mb-0">Profile Information</h6>
                         </div>
+                        <div class="col-md-4 text-end">
+                            <a href="javascript:;">
+                                <i class="fas fa-user-edit text-secondary text-sm" data-bs-toggle="modal"
+                                    data-bs-target="#exampleModal" title="Edit Profile"></i>
+                            </a>
+                        </div>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <form method="POST" action="{{ route('admin.profile.update', auth()->user()->id) }}"
+                        enctype="multipart/form-data">
+                        @csrf
+                        @method('PUT')
 
-                    </div>
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit profile</h5>
+                                    <button type="button" class="btn-close text-dark" data-bs-dismiss="modal"
+                                        aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <div class="row">
+                                        @if ($profile->profile_pic)
+                                        <div class="avatar avatar-xl position-relative">
+                                            <img id="profileImage" src="{{ URL::asset('/build/assets/img/profile_pic/' . $profile->profile_pic) }}"
+                                                alt="profile_image" class="w-100 border-radius-lg shadow-sm" style="margin-left: 15px;">
+                                            <a href="#" id="removeProfilePic">
+                                                <i class="fas fa-trash-alt text-secondary text-sm" title="Remove Profile Pic" style="margin-left: 10px;"></i>
+                                            </a>
+                                        </div>
+                                        @else
+                                        <div class="avatar avatar-xl position-relative">
+                                            <img src="{{ URL::asset('/build/assets/img/person-icon.png') }}"
+                                                alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+                                        </div>
+                                        @endif
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="profile_pic">Profile Picture</label>
+                                        <input type="file" class="form-control-file" id="profile_pic" name="profile_pic">
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="about">About you</label>
+                                        <textarea class="form-control" id="about" name="about" rows="3">{{ auth()->user()->about }}</textarea>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="name">Full Name</label>
+                                        <input class="form-control" type="text" id="name" name="name"
+                                            value="{{ auth()->user()->name }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="passport_no">Mobile No</label>
+                                        <input class="form-control" type="text" id="mobile_no" name="mobile_no"
+                                            value="{{ auth()->user()->mobile_no }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email">Email address</label>
+                                        <input type="email" class="form-control" id="email" name="email"
+                                            placeholder="name@example.com" value="{{ auth()->user()->email }}">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="postal_address">Postal Address</label>
+                                        <input class="form-control" type="text" id="postal_address"
+                                            name="postal_address" value="{{ auth()->user()->postal_address }}">
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn bg-gradient-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn bg-gradient-primary">Save changes</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
+            </div>
+        </div>
                 <div class="card-body p-3">
                     <p class="text-sm">
                         {{ $profile->about }}
@@ -66,9 +153,7 @@
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Email:</strong>
                             &nbsp;
                             {{ $profile->email }}</li>
-                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Passport No:</strong>
-                            &nbsp;
-                            {{ $profile->passport_no }}</li>
+
                         <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Postal Address:</strong>
                             &nbsp;
                             {{ $profile->postal_address }}</li>
@@ -78,6 +163,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-7">
             <div style="display: none;">
                 <div>
@@ -105,3 +191,24 @@
         </div>
     </div>
 @endsection
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#removeProfilePic').on('click', function (e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: '{{ route("removeProfilePic") }}',
+                method: 'POST',
+                data: { _token: '{{ csrf_token() }}' },
+                success: function (data) {
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        });
+    });
+</script>
