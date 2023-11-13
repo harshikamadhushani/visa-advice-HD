@@ -120,7 +120,7 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/profile')->group(function () {
             Route::put('/update{id}', [AdminController::class, 'update'])->name('admin.profile.update');
             Route::post('/remove-profile-pic', [AdminController::class, 'removeProfilePic'])->name('removeProfilePic');
-            Route::get('/setting', [AdminController::class, 'userSetting'])->name('userSetting');
+            Route::get('/setting', [AdminController::class, 'userSetting'])->name('adminSetting');
             Route::post('/reset-password', [AdminController::class, 'resetPassword'])->name('resetPassword');
         });
     });
