@@ -6,7 +6,10 @@ use App\Models\Country;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 use ZipArchive;
 
 class UserProfileController extends Controller
@@ -14,7 +17,10 @@ class UserProfileController extends Controller
     public function index()
     {
 
-        $profile = User::where('id', auth()->user()->id)->first();
+        $profile =  User::where('users.id', auth()->user()->id)
+        ->leftJoin('country', 'users.id', '=', 'country.user_id')
+        ->select('users.*', 'country.country_name', 'country.purpose')
+        ->first();
         $admin = User::where('role_id', 1)->first();
         return view("profile.index", compact('profile','admin'));
     }
@@ -128,5 +134,37 @@ class UserProfileController extends Controller
         }
    }
 
+    public function userSetting(){
+        $profile =  User::where('users.id', auth()->user()->id)
+            ->leftJoin('country', 'users.id', '=', 'country.user_id')
+            ->select('users.*', 'country.country_name', 'country.purpose')
+            ->first();
+        return view('profile.user-setting',compact('profile'));
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'old_password' => ['required', function ($attribute, $value, $fail) {
+                if (!Hash::check($value, auth()->user()->password)) {
+                    $fail('The old password is incorrect.');
+                }
+            }],
+            'new_password' => 'required|min:8',
+            'confirm_password' => 'required|same:new_password',
+        ]);
+
+        // Check if the validation fails
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+
+        // Update the password
+        auth()->user()->update([
+            'password' => Hash::make($request->new_password),
+        ]);
+
+        return redirect()->back()->with('success', 'Password has been reset successfully.');
+    }
 
 }

@@ -234,7 +234,6 @@
                 </div>
             </div>
 
-
             <div class="card-body p-3">
                 <p class="text-sm">
                     {{ $profile->about }}
@@ -258,6 +257,12 @@
                         &nbsp;
                         {{ $profile->postal_address }}
                     </li>
+                    <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Country Name:</strong>
+                        &nbsp;
+                        {{ $profile->country_name }}
+                        <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Purpose of Journey and Expecting Visa Type:</strong>
+                        &nbsp;
+                        {{ $profile->purpose }}</li>
                 </ul>
             </div>
         </div>

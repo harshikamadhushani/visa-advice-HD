@@ -74,6 +74,8 @@ Route::middleware('auth')->group(function () {
             Route::put('/update{id}', [UserProfileController::class, 'update'])->name('user.profile.update');
             Route::post('/remove-profile-pic', [UserProfileController::class, 'removeProfilePic'])->name('removeProfilePic');
             Route::post('/save-country{id}', [UserProfileController::class, 'saveCountry'])->name('saveCountry');
+            Route::get('/setting', [UserProfileController::class, 'userSetting'])->name('userSetting');
+            Route::post('/reset-password', [UserProfileController::class, 'resetPassword'])->name('resetPassword');
 
 
         });
@@ -118,6 +120,8 @@ Route::middleware('auth')->group(function () {
         Route::prefix('/profile')->group(function () {
             Route::put('/update{id}', [AdminController::class, 'update'])->name('admin.profile.update');
             Route::post('/remove-profile-pic', [AdminController::class, 'removeProfilePic'])->name('removeProfilePic');
+            Route::get('/setting', [AdminController::class, 'userSetting'])->name('userSetting');
+            Route::post('/reset-password', [AdminController::class, 'resetPassword'])->name('resetPassword');
         });
     });
 

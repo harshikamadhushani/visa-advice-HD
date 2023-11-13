@@ -160,6 +160,12 @@
                                     Address:</strong>
                                 &nbsp;
                                 {{ $data->postal_address }}</li>
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Country Name:</strong>
+                                &nbsp;
+                                {{ $data->country_name }}
+                                <li class="list-group-item border-0 ps-0 text-sm"><strong class="text-dark">Purpose of Journey and Expecting Visa Type:</strong>
+                                &nbsp;
+                                {{ $data->purpose }}</li>
 
 
                         </ul>
