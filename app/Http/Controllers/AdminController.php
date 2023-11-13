@@ -2,18 +2,138 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmploymentDocument;
+use App\Models\FinancialDocument;
+use App\Models\NonSponsorVisit;
+use App\Models\PersonalDocument;
+use App\Models\SponsorVisit;
 use App\Models\User;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-
-
     public function index(){
         $users = User::where('role_id', 2)
         ->orderBy('id', 'desc')->get();
-        return view('admin.dashboard',compact('users'));
+
+        $count_users = User::role('user')->count();
+
+        $verified_count = $this->getApplicationCount('verified');
+
+        $declined_count = $this->getApplicationCount('rejected');
+
+        return view('admin.dashboard',compact('users', 'count_users', 'verified_count', 'declined_count'));
     }
+
+    public function getApplicationCount($status)
+    {
+        $columns = [
+            'doc_current_or_previous_passport_status',
+            'doc_currently_live_status',
+            'doc_birth_certificate_status',
+            'doc_marriage_certificate_status',
+            'doc_birth_certificate_children_status',
+            'doc_previous_visa_refusals_status',
+            'doc_vaccination_proof_status',
+        ];
+
+        $personal_document = PersonalDocument::select(array_map(function ($column) {
+            return PersonalDocument::raw("COUNT($column) as {$column}_count");
+        }, $columns))
+        ->where(function ($query) use ($columns, $status) {
+            foreach ($columns as $column) {
+                $query->orWhere($column, '=', $status);
+            }
+        })
+        ->first();
+
+        $personal_application_count = array_sum($personal_document->toArray());
+
+        $columns = [
+            'doc_saving_account_status',
+            'doc_fixed_deposit_accounts_status',
+            'doc_current_accounts_status',
+            'doc_money_of_credit_cards_status',
+            'doc_insurance_status',
+            'doc_evidence_of_assets_status',
+        ];
+
+        $financial_document = FinancialDocument::select(array_map(function ($column) {
+            return FinancialDocument::raw("COUNT($column) as {$column}_count");
+        }, $columns))
+        ->where(function ($query) use ($columns, $status) {
+            foreach ($columns as $column) {
+                $query->orWhere($column, '=', $status);
+            }
+        })
+        ->first();
+
+        $financial_application_count = array_sum($financial_document->toArray());
+
+        $columns = [
+            'doc_employee_status',
+            'doc_self_employed_status',
+            'doc_retired_status',
+            'doc_students_status',
+        ];
+
+        $employment_document = EmploymentDocument::select(array_map(function ($column) {
+            return EmploymentDocument::raw("COUNT($column) as {$column}_count");
+        }, $columns))
+        ->where(function ($query) use ($columns, $status) {
+            foreach ($columns as $column) {
+                $query->orWhere($column, '=', $status);
+            }
+        })
+        ->first();
+
+        $employment_application_count = array_sum($employment_document->toArray());
+
+        $columns = [
+            'doc_invitation_letter_status',
+            'doc_residence_permit_status',
+            'doc_evidence_of_available_accommodation_status',
+            'doc_financial_statement_of_host_status',
+            'doc_accountant_letter_and_tax_records_status',
+            'doc_birth_or_marriage_certificate_status',
+        ];
+
+        $sponsor_document = SponsorVisit::select(array_map(function ($column) {
+            return SponsorVisit::raw("COUNT($column) as {$column}_count");
+        }, $columns))
+        ->where(function ($query) use ($columns, $status) {
+            foreach ($columns as $column) {
+                $query->orWhere($column, '=', $status);
+            }
+        })
+        ->first();
+
+        $sponsor_application_count = array_sum($sponsor_document->toArray());
+
+        $columns = [
+            'doc_receipt_of_hotel_reservation_status',
+            'doc_evidence_of_sufficient_funds_status',
+            'doc_travel_itinerary_status',
+            'doc_life_insurance_status',
+        ];
+
+        $non_sponsor_document = NonSponsorVisit::select(array_map(function ($column) {
+            return NonSponsorVisit::raw("COUNT($column) as {$column}_count");
+        }, $columns))
+        ->where(function ($query) use ($columns, $status) {
+            foreach ($columns as $column) {
+                $query->orWhere($column, '=', $status);
+            }
+        })
+        ->first();
+
+        $non_sponsor_application_count = array_sum($non_sponsor_document->toArray());
+
+        return $personal_application_count + $financial_application_count + $employment_application_count + $sponsor_application_count + $non_sponsor_application_count;
+    }
+
     public function allUsers()
     {
         $users = User::where('role_id', 2)

@@ -17,8 +17,8 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Applicants</p>
                     <h5 class="font-weight-bolder mb-0">
-                      5,000
-                      <span class="text-success text-sm font-weight-bolder">+55%</span>
+                      {{ number_format($count_users) }}
+                      <span class="text-success text-sm font-weight-bolder"></span>
                     </h5>
                   </div>
                 </div>
@@ -39,8 +39,8 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Verified Applicants</p>
                     <h5 class="font-weight-bolder mb-0">
-                      1200
-                      <span class="text-success text-sm font-weight-bolder">+3%</span>
+                      {{ $verified_count }}
+                      <span class="text-success text-sm font-weight-bolder"></span>
                     </h5>
                   </div>
                 </div>
@@ -61,7 +61,7 @@
                   <div class="numbers">
                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Declined Applicants</p>
                     <h5 class="font-weight-bolder mb-0">
-                      +43
+                      {{ $declined_count }}
                       <span class="text-danger text-sm font-weight-bolder"></span>
                     </h5>
                   </div>
