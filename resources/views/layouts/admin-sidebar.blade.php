@@ -47,7 +47,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">All Visa Appliers </span>
+            <span class="nav-link-text ms-1">All New Clients </span>
           </a>
         </li>
         <li class="nav-item">
